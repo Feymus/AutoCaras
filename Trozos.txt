@@ -1,0 +1,5 @@
+Trozos posibles
+1.Leer imagen y cargarlas
+2.Vectorizar imágenes 
+3.Crear una matriz con todos las imágenes vectorizadas 
+4.Crear matriz de covarianza
