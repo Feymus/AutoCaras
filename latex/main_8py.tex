@@ -1,0 +1,30 @@
+\hypertarget{main_8py}{}\section{Controller/main.py File Reference}
+\label{main_8py}\index{Controller/main.\+py@{Controller/main.\+py}}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespace_controller_1_1main}{Controller.\+main}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespace_controller_1_1main_afde056e3ffb39cf4210266e4a3c724ec}{Controller.\+main.\+script\+Dir} = os.\+path.\+dirname(\+\_\+\+\_\+file\+\_\+\+\_\+)
+\item 
+int \hyperlink{namespace_controller_1_1main_a551a13a2be12ee8db7e027437ded21e7}{Controller.\+main.\+contador} = 0
+\item 
+\hyperlink{namespace_controller_1_1main_a6808351aab7a7dabdfde550a30c719b1}{Controller.\+main.\+lista} = os.\+listdir(\textquotesingle{}../Images/s1\textquotesingle{})
+\item 
+\hyperlink{namespace_controller_1_1main_ab64b1d5d85baa87feb723b5020958dc9}{Controller.\+main.\+numero\+Imagenes} = len(lista)
+\item 
+list \hyperlink{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}{Controller.\+main.\+matriz\+Img\+Vec} = \mbox{[}\mbox{[}$\,$\mbox{]}\mbox{]}
+\item 
+\hyperlink{namespace_controller_1_1main_ada4e168ced647a0550eb8ae2c15e1037}{Controller.\+main.\+impath} = os.\+path.\+join(script\+Dir,\textquotesingle{}../Images/s1/\textquotesingle{}+str(contador+1)+\textquotesingle{}.pgm\textquotesingle{})
+\item 
+\hyperlink{namespace_controller_1_1main_adad82d87439471603c309d29ce1fcd16}{Controller.\+main.\+arr} = cv2.\+imread(impath,0)
+\item 
+\hyperlink{namespace_controller_1_1main_aedd35c1d9c6106eaec585482a5020709}{Controller.\+main.\+flat\+\_\+arr} = arr.\+ravel()
+\item 
+int \hyperlink{namespace_controller_1_1main_a71a788edfd86f78336518c22203e2bc4}{Controller.\+main.\+y} = 1
+\item 
+\hyperlink{namespace_controller_1_1main_a16245faf87dfaee9eec6634fd40179c0}{Controller.\+main.\+m} = np.\+cov(matriz\+Img\+Vec)
+\end{DoxyCompactItemize}

@@ -1,0 +1,88 @@
+\hypertarget{namespace_controller_1_1main}{}\section{Controller.\+main Namespace Reference}
+\label{namespace_controller_1_1main}\index{Controller.\+main@{Controller.\+main}}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespace_controller_1_1main_afde056e3ffb39cf4210266e4a3c724ec}{script\+Dir} = os.\+path.\+dirname(\+\_\+\+\_\+file\+\_\+\+\_\+)
+\item 
+int \hyperlink{namespace_controller_1_1main_a551a13a2be12ee8db7e027437ded21e7}{contador} = 0
+\item 
+\hyperlink{namespace_controller_1_1main_a6808351aab7a7dabdfde550a30c719b1}{lista} = os.\+listdir(\textquotesingle{}../Images/s1\textquotesingle{})
+\item 
+\hyperlink{namespace_controller_1_1main_ab64b1d5d85baa87feb723b5020958dc9}{numero\+Imagenes} = len(\hyperlink{namespace_controller_1_1main_a6808351aab7a7dabdfde550a30c719b1}{lista})
+\item 
+list \hyperlink{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}{matriz\+Img\+Vec} = \mbox{[}\mbox{[}$\,$\mbox{]}\mbox{]}
+\item 
+\hyperlink{namespace_controller_1_1main_ada4e168ced647a0550eb8ae2c15e1037}{impath} = os.\+path.\+join(\hyperlink{namespace_controller_1_1main_afde056e3ffb39cf4210266e4a3c724ec}{script\+Dir},\textquotesingle{}../Images/s1/\textquotesingle{}+str(\hyperlink{namespace_controller_1_1main_a551a13a2be12ee8db7e027437ded21e7}{contador}+1)+\textquotesingle{}.pgm\textquotesingle{})
+\item 
+\hyperlink{namespace_controller_1_1main_adad82d87439471603c309d29ce1fcd16}{arr} = cv2.\+imread(\hyperlink{namespace_controller_1_1main_ada4e168ced647a0550eb8ae2c15e1037}{impath},0)
+\item 
+\hyperlink{namespace_controller_1_1main_aedd35c1d9c6106eaec585482a5020709}{flat\+\_\+arr} = arr.\+ravel()
+\item 
+int \hyperlink{namespace_controller_1_1main_a71a788edfd86f78336518c22203e2bc4}{y} = 1
+\item 
+\hyperlink{namespace_controller_1_1main_a16245faf87dfaee9eec6634fd40179c0}{m} = np.\+cov(\hyperlink{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}{matriz\+Img\+Vec})
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespace_controller_1_1main_adad82d87439471603c309d29ce1fcd16}\label{namespace_controller_1_1main_adad82d87439471603c309d29ce1fcd16}} 
+\index{Controller\+::main@{Controller\+::main}!arr@{arr}}
+\index{arr@{arr}!Controller\+::main@{Controller\+::main}}
+\subsubsection{\texorpdfstring{arr}{arr}}
+{\footnotesize\ttfamily Controller.\+main.\+arr = cv2.\+imread(\hyperlink{namespace_controller_1_1main_ada4e168ced647a0550eb8ae2c15e1037}{impath},0)}
+
+\mbox{\Hypertarget{namespace_controller_1_1main_a551a13a2be12ee8db7e027437ded21e7}\label{namespace_controller_1_1main_a551a13a2be12ee8db7e027437ded21e7}} 
+\index{Controller\+::main@{Controller\+::main}!contador@{contador}}
+\index{contador@{contador}!Controller\+::main@{Controller\+::main}}
+\subsubsection{\texorpdfstring{contador}{contador}}
+{\footnotesize\ttfamily int Controller.\+main.\+contador = 0}
+
+\mbox{\Hypertarget{namespace_controller_1_1main_aedd35c1d9c6106eaec585482a5020709}\label{namespace_controller_1_1main_aedd35c1d9c6106eaec585482a5020709}} 
+\index{Controller\+::main@{Controller\+::main}!flat\+\_\+arr@{flat\+\_\+arr}}
+\index{flat\+\_\+arr@{flat\+\_\+arr}!Controller\+::main@{Controller\+::main}}
+\subsubsection{\texorpdfstring{flat\+\_\+arr}{flat\_arr}}
+{\footnotesize\ttfamily Controller.\+main.\+flat\+\_\+arr = arr.\+ravel()}
+
+\mbox{\Hypertarget{namespace_controller_1_1main_ada4e168ced647a0550eb8ae2c15e1037}\label{namespace_controller_1_1main_ada4e168ced647a0550eb8ae2c15e1037}} 
+\index{Controller\+::main@{Controller\+::main}!impath@{impath}}
+\index{impath@{impath}!Controller\+::main@{Controller\+::main}}
+\subsubsection{\texorpdfstring{impath}{impath}}
+{\footnotesize\ttfamily Controller.\+main.\+impath = os.\+path.\+join(\hyperlink{namespace_controller_1_1main_afde056e3ffb39cf4210266e4a3c724ec}{script\+Dir},\textquotesingle{}../Images/s1/\textquotesingle{}+str(\hyperlink{namespace_controller_1_1main_a551a13a2be12ee8db7e027437ded21e7}{contador}+1)+\textquotesingle{}.pgm\textquotesingle{})}
+
+\mbox{\Hypertarget{namespace_controller_1_1main_a6808351aab7a7dabdfde550a30c719b1}\label{namespace_controller_1_1main_a6808351aab7a7dabdfde550a30c719b1}} 
+\index{Controller\+::main@{Controller\+::main}!lista@{lista}}
+\index{lista@{lista}!Controller\+::main@{Controller\+::main}}
+\subsubsection{\texorpdfstring{lista}{lista}}
+{\footnotesize\ttfamily Controller.\+main.\+lista = os.\+listdir(\textquotesingle{}../Images/s1\textquotesingle{})}
+
+\mbox{\Hypertarget{namespace_controller_1_1main_a16245faf87dfaee9eec6634fd40179c0}\label{namespace_controller_1_1main_a16245faf87dfaee9eec6634fd40179c0}} 
+\index{Controller\+::main@{Controller\+::main}!m@{m}}
+\index{m@{m}!Controller\+::main@{Controller\+::main}}
+\subsubsection{\texorpdfstring{m}{m}}
+{\footnotesize\ttfamily Controller.\+main.\+m = np.\+cov(\hyperlink{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}{matriz\+Img\+Vec})}
+
+\mbox{\Hypertarget{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}\label{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}} 
+\index{Controller\+::main@{Controller\+::main}!matriz\+Img\+Vec@{matriz\+Img\+Vec}}
+\index{matriz\+Img\+Vec@{matriz\+Img\+Vec}!Controller\+::main@{Controller\+::main}}
+\subsubsection{\texorpdfstring{matriz\+Img\+Vec}{matrizImgVec}}
+{\footnotesize\ttfamily list Controller.\+main.\+matriz\+Img\+Vec = \mbox{[}\mbox{[}$\,$\mbox{]}\mbox{]}}
+
+\mbox{\Hypertarget{namespace_controller_1_1main_ab64b1d5d85baa87feb723b5020958dc9}\label{namespace_controller_1_1main_ab64b1d5d85baa87feb723b5020958dc9}} 
+\index{Controller\+::main@{Controller\+::main}!numero\+Imagenes@{numero\+Imagenes}}
+\index{numero\+Imagenes@{numero\+Imagenes}!Controller\+::main@{Controller\+::main}}
+\subsubsection{\texorpdfstring{numero\+Imagenes}{numeroImagenes}}
+{\footnotesize\ttfamily Controller.\+main.\+numero\+Imagenes = len(\hyperlink{namespace_controller_1_1main_a6808351aab7a7dabdfde550a30c719b1}{lista})}
+
+\mbox{\Hypertarget{namespace_controller_1_1main_afde056e3ffb39cf4210266e4a3c724ec}\label{namespace_controller_1_1main_afde056e3ffb39cf4210266e4a3c724ec}} 
+\index{Controller\+::main@{Controller\+::main}!script\+Dir@{script\+Dir}}
+\index{script\+Dir@{script\+Dir}!Controller\+::main@{Controller\+::main}}
+\subsubsection{\texorpdfstring{script\+Dir}{scriptDir}}
+{\footnotesize\ttfamily Controller.\+main.\+script\+Dir = os.\+path.\+dirname(\+\_\+\+\_\+file\+\_\+\+\_\+)}
+
+\mbox{\Hypertarget{namespace_controller_1_1main_a71a788edfd86f78336518c22203e2bc4}\label{namespace_controller_1_1main_a71a788edfd86f78336518c22203e2bc4}} 
+\index{Controller\+::main@{Controller\+::main}!y@{y}}
+\index{y@{y}!Controller\+::main@{Controller\+::main}}
+\subsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily int Controller.\+main.\+y = 1}
+

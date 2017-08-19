@@ -1,17 +1,20 @@
-'''
-Created on Aug 16, 2017
+##@package docstring
+#Created on Aug 16, 2017
+#
+#@author Michael Choque
 
-@author: HP
-'''
 from Controller.GestorSujeto import GestorSujeto
 import cv2
 import numpy as np
 
+## Clase controlador
+#
+# Esta clase es la que permite la comunicacion entre los datos de la aplicacion y la interfaz de usuario
 class Controlador(object):
-    '''
-    classdocs
-    '''
 
+    ## Constructor de la clase
+    # 
+    # El constructor unicamente inicializa la lista de Sujetos en la aplicacion
     def __init__(self):
         self.listaDeSujetos = GestorSujeto()
     
@@ -47,6 +50,10 @@ class Controlador(object):
         
         return matrizImgVec
     
+    ## Metodo DefinirMatrizDeCovarianza
+    #
+    # @param matrizImgVec el metodo recibe una matriz de imagenes vectorizadas con la que se calculara la matriz de covarianza
+    # @return matrizCov se devuelve la matriz de covarianza calculada 
     def DefinirMatrizDeCovarianza(self, matrizImgVec):
         matrizCov = np.cov(matrizImgVec)
         return matrizCov

@@ -1,0 +1,94 @@
+\hypertarget{class_controller_1_1_controlador_1_1_controlador}{}\section{Controller.\+Controlador.\+Controlador Class Reference}
+\label{class_controller_1_1_controlador_1_1_controlador}\index{Controller.\+Controlador.\+Controlador@{Controller.\+Controlador.\+Controlador}}
+
+
+Clase controlador.  
+
+
+Inheritance diagram for Controller.\+Controlador.\+Controlador\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_controller_1_1_controlador_1_1_controlador}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{class_controller_1_1_controlador_1_1_controlador_ad30f895c86fb2085fbd3b2c0a1c9f38c}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\begin{DoxyCompactList}\small\item\em Constructor de la clase. \end{DoxyCompactList}\item 
+def \hyperlink{class_controller_1_1_controlador_1_1_controlador_a4bbeb1232cf73c6c9113e7ffda714b63}{Vectorizar\+Imagen} (self, img)
+\item 
+def \hyperlink{class_controller_1_1_controlador_1_1_controlador_a88254f919a6b1d7ed25e2f54b528a15c}{Definir\+Matriz\+De\+Imagenes} (self, list\+Imgs)
+\item 
+def \hyperlink{class_controller_1_1_controlador_1_1_controlador_a4c342a4b7f56c2f8a566cdf62030816c}{Definir\+Matriz\+De\+Covarianza} (self, matriz\+Img\+Vec)
+\begin{DoxyCompactList}\small\item\em Metodo Definir\+Matriz\+De\+Covarianza. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_controller_1_1_controlador_1_1_controlador_ac7f14b4e1c0f2bf39ef0ddf2ae687898}{lista\+De\+Sujetos}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Clase controlador. 
+
+Esta clase es la que permite la comunicacion entre los datos de la aplicacion y la interfaz de usuario 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_controller_1_1_controlador_1_1_controlador_ad30f895c86fb2085fbd3b2c0a1c9f38c}\label{class_controller_1_1_controlador_1_1_controlador_ad30f895c86fb2085fbd3b2c0a1c9f38c}} 
+\index{Controller\+::\+Controlador\+::\+Controlador@{Controller\+::\+Controlador\+::\+Controlador}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!Controller\+::\+Controlador\+::\+Controlador@{Controller\+::\+Controlador\+::\+Controlador}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Controller.\+Controlador.\+Controlador.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Constructor de la clase. 
+
+El constructor unicamente inicializa la lista de Sujetos en la aplicacion 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_controller_1_1_controlador_1_1_controlador_a4c342a4b7f56c2f8a566cdf62030816c}\label{class_controller_1_1_controlador_1_1_controlador_a4c342a4b7f56c2f8a566cdf62030816c}} 
+\index{Controller\+::\+Controlador\+::\+Controlador@{Controller\+::\+Controlador\+::\+Controlador}!Definir\+Matriz\+De\+Covarianza@{Definir\+Matriz\+De\+Covarianza}}
+\index{Definir\+Matriz\+De\+Covarianza@{Definir\+Matriz\+De\+Covarianza}!Controller\+::\+Controlador\+::\+Controlador@{Controller\+::\+Controlador\+::\+Controlador}}
+\subsubsection{\texorpdfstring{Definir\+Matriz\+De\+Covarianza()}{DefinirMatrizDeCovarianza()}}
+{\footnotesize\ttfamily def Controller.\+Controlador.\+Controlador.\+Definir\+Matriz\+De\+Covarianza (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{matriz\+Img\+Vec }\end{DoxyParamCaption})}
+
+
+
+Metodo Definir\+Matriz\+De\+Covarianza. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matriz\+Img\+Vec} & el metodo recibe una matriz de imagenes vectorizadas con la que se calculara la matriz de covarianza \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+matriz\+Cov se devuelve la matriz de covarianza calculada 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_controller_1_1_controlador_1_1_controlador_a88254f919a6b1d7ed25e2f54b528a15c}\label{class_controller_1_1_controlador_1_1_controlador_a88254f919a6b1d7ed25e2f54b528a15c}} 
+\index{Controller\+::\+Controlador\+::\+Controlador@{Controller\+::\+Controlador\+::\+Controlador}!Definir\+Matriz\+De\+Imagenes@{Definir\+Matriz\+De\+Imagenes}}
+\index{Definir\+Matriz\+De\+Imagenes@{Definir\+Matriz\+De\+Imagenes}!Controller\+::\+Controlador\+::\+Controlador@{Controller\+::\+Controlador\+::\+Controlador}}
+\subsubsection{\texorpdfstring{Definir\+Matriz\+De\+Imagenes()}{DefinirMatrizDeImagenes()}}
+{\footnotesize\ttfamily def Controller.\+Controlador.\+Controlador.\+Definir\+Matriz\+De\+Imagenes (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{list\+Imgs }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_controller_1_1_controlador_1_1_controlador_a4bbeb1232cf73c6c9113e7ffda714b63}\label{class_controller_1_1_controlador_1_1_controlador_a4bbeb1232cf73c6c9113e7ffda714b63}} 
+\index{Controller\+::\+Controlador\+::\+Controlador@{Controller\+::\+Controlador\+::\+Controlador}!Vectorizar\+Imagen@{Vectorizar\+Imagen}}
+\index{Vectorizar\+Imagen@{Vectorizar\+Imagen}!Controller\+::\+Controlador\+::\+Controlador@{Controller\+::\+Controlador\+::\+Controlador}}
+\subsubsection{\texorpdfstring{Vectorizar\+Imagen()}{VectorizarImagen()}}
+{\footnotesize\ttfamily def Controller.\+Controlador.\+Controlador.\+Vectorizar\+Imagen (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{img }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_controller_1_1_controlador_1_1_controlador_ac7f14b4e1c0f2bf39ef0ddf2ae687898}\label{class_controller_1_1_controlador_1_1_controlador_ac7f14b4e1c0f2bf39ef0ddf2ae687898}} 
+\index{Controller\+::\+Controlador\+::\+Controlador@{Controller\+::\+Controlador\+::\+Controlador}!lista\+De\+Sujetos@{lista\+De\+Sujetos}}
+\index{lista\+De\+Sujetos@{lista\+De\+Sujetos}!Controller\+::\+Controlador\+::\+Controlador@{Controller\+::\+Controlador\+::\+Controlador}}
+\subsubsection{\texorpdfstring{lista\+De\+Sujetos}{listaDeSujetos}}
+{\footnotesize\ttfamily Controller.\+Controlador.\+Controlador.\+lista\+De\+Sujetos}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Controller/\hyperlink{_controlador_8py}{Controlador.\+py}\end{DoxyCompactItemize}
