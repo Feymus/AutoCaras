@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['agregar',['Agregar',['../class_controller_1_1_gestor_general_1_1_gestor_general.html#a9b620b3b9747d3f976c499d623bb975b',1,'Controller::GestorGeneral::GestorGeneral']]]
+  ['definirmatrizdecovarianza',['DefinirMatrizDeCovarianza',['../class_controller_1_1_controlador_1_1_controlador.html#a4c342a4b7f56c2f8a566cdf62030816c',1,'Controller::Controlador::Controlador']]]
 ];
