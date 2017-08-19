@@ -1,7 +1,7 @@
 ##@package docstring
 #Created on Aug 16, 2017
 #
-#@author Michael Choque
+#@author: Michael Choque
 
 from Controller.GestorSujeto import GestorSujeto
 import cv2
