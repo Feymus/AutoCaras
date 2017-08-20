@@ -6,6 +6,7 @@
 from Controller.GestorSujeto import GestorSujeto
 import cv2
 import numpy as np
+import os
 
 ## Clase controlador
 #
@@ -18,8 +19,22 @@ class Controlador(object):
     def __init__(self):
         self.listaDeSujetos = GestorSujeto()
     
+    # direccion valida C:/Users/HP/Desktop/TEC/II Semestre 2017/Aseguramiento de calidad/Proyecto/AutoCaras/Images
+    def CargarImagenes(self, img_url):
+
+        imagenes = []
+        sujetos = [sujeto for sujeto in os.listdir(img_url) 
+                        if os.path.isdir(os.path.join(img_url, sujeto))]
+
+        for sujeto in sujetos:
+            imgspath = os.listdir(img_url + '/' + sujeto)
+            for img in imgspath:
+                imagenes.append(img_url + '/' + sujeto + '/' + img)
+        
+        return imagenes
+    
     ##Funcion que vectoriza una imagen que le entra por parametro
-    #@param recive la imagen
+    #@param img recibe la imagen
     #@return flat_arr, devuelve la lista de una imagen vectorizada.
     def VectorizarImagen(self, img):
         
@@ -30,7 +45,7 @@ class Controlador(object):
         return flat_arr   
     
     ##Funcion que crea la matriz con las imagenes vectorizadas
-    #@param la lista de la imagen ya vectorizada
+    #@param listImgs la lista de la imagen ya vectorizada
     #@return MatrizImgVec, es la matriz con todas las imagenes vectorizadas de un sujeto
     def DefinirMatrizDeImagenes(self, listImgs):
         

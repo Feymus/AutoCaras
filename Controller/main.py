@@ -8,8 +8,11 @@ import os  #libreria para contar la cantidad de fotos por carpeta del sujeto
 # Consigo la direccion donde se encuentra la imagen
 scriptDir = os.path.dirname(__file__)
 contador = 0 #contador que recorre imagen por imagen
-lista = os.listdir('../Images/s1') # devuelve cantidad de fotos en direccion dada
-
+dirs = [d for d in os.listdir('../Images/') if os.path.isdir(os.path.join('../Images/', d))]
+lista = os.listdir('../Images/') # devuelve cantidad de fotos en direccion dada
+print(dirs)
+print(str(len(dirs)))
+'''
 numeroImagenes = len(lista) #numero de imagenes en direccion
 matrizImgVec = [[]]
 
@@ -42,7 +45,7 @@ m = np.cov(matrizImgVec)
 print(m)
 print(len(m))
 print(len(m[0]))
-
+'''
 
 if __name__ == "__main__":
     pass

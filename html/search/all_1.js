@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['controlador',['Controlador',['../class_controller_1_1_controlador_1_1_controlador.html',1,'Controller::Controlador']]],
-  ['controladorpruebaunitaria',['ControladorPruebaUnitaria',['../namespace_controller_1_1_controlador_prueba_unitaria.html',1,'Controller']]],
-  ['gestorgeneral',['GestorGeneral',['../namespace_controller_1_1_gestor_general.html',1,'Controller']]],
-  ['gestorsujeto',['GestorSujeto',['../namespace_controller_1_1_gestor_sujeto.html',1,'Controller']]]
+  ['agregar',['Agregar',['../class_controller_1_1_gestor_general_1_1_gestor_general.html#a9b620b3b9747d3f976c499d623bb975b',1,'Controller::GestorGeneral::GestorGeneral']]],
+  ['arr',['arr',['../namespace_controller_1_1main.html#adad82d87439471603c309d29ce1fcd16',1,'Controller::main']]]
 ];
