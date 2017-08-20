@@ -12,7 +12,7 @@ dirs = [d for d in os.listdir('../Images/') if os.path.isdir(os.path.join('../Im
 lista = os.listdir('../Images/') # devuelve cantidad de fotos en direccion dada
 print(dirs)
 print(str(len(dirs)))
-'''
+
 numeroImagenes = len(lista) #numero de imagenes en direccion
 matrizImgVec = [[]]
 
@@ -41,6 +41,7 @@ print (matrizImgVec)
 print("Cantidad de imagenes: " + str(len(matrizImgVec[0])))
 print("Tamano: " + str(len(matrizImgVec)))    
 
+'''
 m = np.cov(matrizImgVec)
 print(m)
 print(len(m))
@@ -48,7 +49,8 @@ print(len(m[0]))
 '''
 
 if __name__ == "__main__":
-    pass
+    m = np.cov([[1,2],[3,4]])
+    print(m)
 
 
 
