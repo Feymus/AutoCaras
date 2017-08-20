@@ -2,9 +2,14 @@ body,h1,h2,h3,h4,h5,h6 {
 	font-family: "Lato", sans-serif;
 }
 
-.w3-bar, .w3-container {
+.w3-bar {
 	font-family: "Montserrat", sans-serif;
 	background: #303F9F;
+}
+
+.w3-container {
+	font-family: "Montserrat", sans-serif;
+	background: #3F51B5;
 }
 
 .fa-anchor,.fa-coffee  {
