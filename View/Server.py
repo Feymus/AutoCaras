@@ -12,6 +12,7 @@ from Controller.Controlador import Controlador
 controlador = Controlador()
 app = Flask(__name__, static_url_path='')
 
+
 @app.route('/')
 def main_index():
     return app.send_static_file('index.html')
@@ -20,8 +21,11 @@ def main_index():
 def submit_imgs_dir():
     if request.method == 'POST':
         img_url = request.form['img_url']
-        controlador.CargarImagenes(img_url)
-        return "Okay"
+        estado = controlador.CargarImagenes(img_url)
+        if estado == True:
+            print(controlador.Entrenar())
+            return "Okay"
+        return "Not Okay"
     return app.send_static_file('index.html')
 
 
