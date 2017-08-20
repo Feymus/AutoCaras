@@ -33,6 +33,7 @@ while (contador+1<=2):
     
     
 del matrizImgVec[0] #elimina el primer elemento que era vacio
+print("where are you ? ")
 print (matrizImgVec)
 print("Cantidad de imagenes: " + str(len(matrizImgVec[0])))
 print("Tamano: " + str(len(matrizImgVec)))    
