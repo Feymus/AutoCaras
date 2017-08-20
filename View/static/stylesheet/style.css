@@ -1,0 +1,30 @@
+body,h1,h2,h3,h4,h5,h6 {
+	font-family: "Lato", sans-serif;
+}
+
+.w3-bar, .w3-container {
+	font-family: "Montserrat", sans-serif;
+	background: #303F9F;
+}
+
+.fa-anchor,.fa-coffee  {
+	font-size:200px;
+}
+
+.input { 
+	width:30em; 
+	vertical-align: middle;
+}
+
+.button {
+	vertical-align: middle;
+} 
+
+.dark-primary-color    { background: #303F9F; }
+.default-primary-color { background: #3F51B5; }
+.light-primary-color   { background: #C5CAE9; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #9E9E9E; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #757575; }
+.divider-color         { border-color: #BDBDBD; }
