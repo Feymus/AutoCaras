@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="CargaDeImagenes">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.js"></script>
+	<script src="js/script.js"></script>
+	<body>
+
+		<div ng-controller="CargaImgsCtrl">
+ 
+			<p>Ingrese la direccion donde se encuentran los/el sujeto(s):</p>
+			<p>Direccion: <input type="text" ng-model="name"><button ng-click="send_dir()">Enviar</button></p>
+			<p ng-bind="name"></p>
+
+		</div>
+
+	</body>
+
+</html>
