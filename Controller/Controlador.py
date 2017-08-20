@@ -42,11 +42,14 @@ class Controlador(object):
                     dict_sujeto["fotos"].append(arr)
                     self.AgregarSujeto(dict_sujeto)
                     
-            return True
+            return (0, "Carga completada!") 
         
+        except FileNotFoundError as FNF:
+            print(FNF)
+            return (-1, "Error: Direccion no encontrada")
         except:
             print("Error inesperado: ", sys.exc_info()[0])
-            return False
+            return (-1, "Error: Desconocido")
         
     def Entrenar(self):
         imgs = self.listaDeSujetos.getAllImgs()

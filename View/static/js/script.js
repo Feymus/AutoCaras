@@ -15,8 +15,9 @@ myApp.controller('CargaImgsCtrl', function($scope, $http){
 			method: "POST",
 			data: data_json,
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-		}).then(function(data) {
-		  console.log(data)
+		}).then(function(response) {
+		  var json_response = response['data'];
+		  alert(json_response['msg'])
 		});
   }
 

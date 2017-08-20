@@ -6,6 +6,7 @@
 import os
 from flask import Flask
 from flask import request
+from flask import jsonify
 from Controller.Controlador import Controlador
 
 
@@ -22,10 +23,16 @@ def submit_imgs_dir():
     if request.method == 'POST':
         img_url = request.form['img_url']
         estado = controlador.CargarImagenes(img_url)
-        if estado == True:
+        
+        respuesta = jsonify( 
+            status=estado[0],
+            msg=estado[1]
+        )
+        
+        if estado[0] == 0:
             print(controlador.Entrenar())
-            return "Okay"
-        return "Not Okay"
+            return respuesta
+        return respuesta
     return app.send_static_file('index.html')
 
 
