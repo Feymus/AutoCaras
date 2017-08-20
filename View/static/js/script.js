@@ -19,6 +19,6 @@ myApp.controller('CargaImgsCtrl', function($scope, $http){
 		  var json_response = response['data'];
 		  alert(json_response['msg'])
 		});
-  }
+  	}
 
 });
