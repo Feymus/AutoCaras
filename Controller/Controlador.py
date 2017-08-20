@@ -4,9 +4,8 @@
 #@author: Michael Choque
 
 from Controller.GestorSujeto import GestorSujeto
-import cv2
 import numpy as np
-import os
+import os, sys, cv2
 
 ## Clase controlador
 #
@@ -18,35 +17,53 @@ class Controlador(object):
     # El constructor unicamente inicializa la lista de Sujetos en la aplicacion
     def __init__(self):
         self.listaDeSujetos = GestorSujeto()
+        
+    
+    def AgregarSujeto(self, dict_sujeto):
+        return self.listaDeSujetos.Agregar(dict_sujeto)
     
     # direccion valida C:/Users/HP/Desktop/TEC/II Semestre 2017/Aseguramiento de calidad/Proyecto/AutoCaras/Images
     def CargarImagenes(self, img_url):
 
-        imagenes = []
-        sujetos = [sujeto for sujeto in os.listdir(img_url) 
-                        if os.path.isdir(os.path.join(img_url, sujeto))]
-
-        for sujeto in sujetos:
-            imgspath = os.listdir(img_url + '/' + sujeto)
-            for img in imgspath:
-                imagenes.append(img_url + '/' + sujeto + '/' + img)
+        try:
+            sujetos = [sujeto for sujeto in os.listdir(img_url) 
+                            if os.path.isdir(os.path.join(img_url, sujeto))]
+    
+            for sujeto in sujetos:
+                imgspath = os.listdir(img_url + '/' + sujeto)
+                dict_sujeto = {}
+                dict_sujeto["nombre"] = sujeto
+                dict_sujeto["fotos"] = []
+                
+                for img in imgspath:
+                    path = img_url + '/' + sujeto + '/' + img
+                    arr = cv2.imread(path, 0) # Matriz de una imagen en escala de grises
+                    arr = cv2.resize(arr, (112, 92)) # Reescalamos la imagen para que sea 112*92
+                    dict_sujeto["fotos"].append(arr)
+                    self.AgregarSujeto(dict_sujeto)
+                    
+            return True
         
-        return imagenes
+        except:
+            print("Error inesperado: ", sys.exc_info()[0])
+            return False
+        
+    def Entrenar(self):
+        imgs = self.listaDeSujetos.getAllImgs()
+        matrizImgVec = self.DefinirMatrizDeImagenes(imgs)
+        matrizDeCov = self.DefinirMatrizDeCovarianza(matrizImgVec)
+        return matrizDeCov
     
     ##Funcion que vectoriza una imagen que le entra por parametro
     #@param img recibe la imagen
-    #@return flat_arr, devuelve la lista de una imagen vectorizada.
+    #@return flat_img devuelve la lista de una imagen vectorizada.
     def VectorizarImagen(self, img):
-        
-        arr = cv2.imread(img,0) # Matriz de una imagen en escala de grises
-        arr = cv2.resize(arr, (112, 92)) # Reescalamos la imagen para que sea 112*92
-        flat_arr = arr.ravel() # Vectorizacion de una matriz
-        
-        return flat_arr   
+        flat_img = img.ravel() # Vectorizacion de una matriz
+        return flat_img   
     
     ##Funcion que crea la matriz con las imagenes vectorizadas
     #@param listImgs la lista de la imagen ya vectorizada
-    #@return MatrizImgVec, es la matriz con todas las imagenes vectorizadas de un sujeto
+    #@return MatrizImgVec es la matriz con todas las imagenes vectorizadas de un sujeto
     def DefinirMatrizDeImagenes(self, listImgs):
         
         contador = 0  #contador que lleva control de cuantas veces se ejecuta el ciclo while
