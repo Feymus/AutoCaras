@@ -2,6 +2,8 @@
 #Created on Aug 19, 2017
 #
 #@author: Michael Choque
+#@author: Nelson Gómez
+#@author: William Espinoza
 
 import unittest
 from Controller.Controlador import Controlador
@@ -17,35 +19,50 @@ class ControladorTest(unittest.TestCase):
     def setUp(self):
         self.foo = Controlador()
 
-
-    def tearDown(self):
-        pass
+    
+    ## Metodo test_CargarImagenes
+    #
+    # Prueba del metodo CargarImagenes en la clase Controlador, la prueba se realiza asegurando que se consigan todas las imagenes de los sujetos
+    # que esten en la direccion dada y confirmando que la lista de sujetos no este vacia y que existan imagenes (esto ultimo puede no darse)
+    def test_CargarImagenes(self):
+        result = self.foo.CargarImagenes("../Images/")
+        self.assertEqual(result[0], 0)
+        self.assertNotEqual(self.foo.listaDeSujetos.getAllImgs(), [])
+        self.assertNotEqual(self.foo.listaDeSujetos.listaGeneral, [])
 
     ## Metodo test_VectorizarImagen
     #
     # Prueba del metodo VectorizarImagen en la clase Controlador, la prueba se realiza asegurando que la imagen tenga el tamano correcto
     # y confirmando el primer y ultimo pixel de a imagen (los cuales pueden variar un poco por las transformacinoes)
     def test_VectorizarImagen(self):
-        result = self.foo.VectorizarImagen("../Images/s1/1.pgm")
+        self.foo.CargarImagenes("../Images/")
+        imagenes = self.foo.listaDeSujetos.getAllImgs()
+        result = self.foo.VectorizarImagen(imagenes[0])
         self.assertEqual(len(result), 10304)
-        self.assertAlmostEquals(result[0], 131)
-        self.assertAlmostEquals(result[-1], 25)
+        self.assertGreaterEqual(result[0], 0)
+        self.assertLessEqual(result[0], 255)
+        self.assertGreaterEqual(result[-1], 0)
+        self.assertLessEqual(result[-1], 255)
     
     ## Metodo test_MatrizDeImagenes
     #
     # Prueba del metodo DefinirMatrizDeImagenes en la case Controlador, la prueba se realiza asegurando el tamano de la matriz (tanto filas como columnas)
     # segun la cantidad de imagenes
     def test_MatrizDeImagenes(self):
-        result = self.foo.DefinirMatrizDeImagenes(["../Images/s1/1.pgm", "../Images/s1/2.pgm"])
+        self.foo.CargarImagenes("../Images/")
+        imagenes = self.foo.listaDeSujetos.getAllImgs()
+        result = self.foo.DefinirMatrizDeImagenes(imagenes)
         self.assertEquals(len(result), 10304)
-        self.assertEquals(len(result[0]), 2)
+        self.assertEquals(len(result[0]), 410)
     
     ## Metodo test_MatrizDeCovarianza
     #
     # Prueba del metodo DefinirMatrizDeCovarianza en la case Controlador, la prueba se realiza asegurando el tamano de la matriz (tanto filas como columnas)
     # segun la cantidad de imagenes, la cual siempre debera de ser 10304*10304
     def test_MatrizDeCovarianza(self):
-        matrizImgVec = self.foo.DefinirMatrizDeImagenes(["../Images/s1/1.pgm", "../Images/s1/2.pgm", "../Images/s1/3.pgm"])
+        self.foo.CargarImagenes("../Images/")
+        imagenes = self.foo.listaDeSujetos.getAllImgs()
+        matrizImgVec = self.foo.DefinirMatrizDeImagenes(imagenes)
         result = self.foo.DefinirMatrizDeCovarianza(matrizImgVec)
         self.assertEquals(len(result), 10304)
         self.assertEquals(len(result[0]), 10304)

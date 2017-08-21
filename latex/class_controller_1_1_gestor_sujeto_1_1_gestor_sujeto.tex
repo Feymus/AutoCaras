@@ -1,5 +1,10 @@
 \hypertarget{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto}{}\section{Controller.\+Gestor\+Sujeto.\+Gestor\+Sujeto Class Reference}
 \label{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto}\index{Controller.\+Gestor\+Sujeto.\+Gestor\+Sujeto@{Controller.\+Gestor\+Sujeto.\+Gestor\+Sujeto}}
+
+
+Clase \hyperlink{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto}{Gestor\+Sujeto}.  
+
+
 Inheritance diagram for Controller.\+Gestor\+Sujeto.\+Gestor\+Sujeto\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,14 +15,18 @@ Inheritance diagram for Controller.\+Gestor\+Sujeto.\+Gestor\+Sujeto\+:\begin{fi
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto_af03120d2a26ad27cf43979b059065818}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructor de la clase. \end{DoxyCompactList}\item 
+def \hyperlink{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto_a1c67d8cc16d790e739b12e48b150d05d}{Agregar} (self, dict\+\_\+sujeto)
+\begin{DoxyCompactList}\small\item\em Metodo Agregar. \end{DoxyCompactList}\item 
+def \hyperlink{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto_af5cd0c01af8ad7d3da5f72ac4d9a93cf}{get\+All\+Imgs} (self)
+\begin{DoxyCompactList}\small\item\em Metodo get\+All\+Imgs. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Detailed Description}
-\begin{DoxyVerb}classdocs
-\end{DoxyVerb}
- 
+Clase \hyperlink{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto}{Gestor\+Sujeto}. 
+
+Clase hija del gestor general, encargada de guardar sujetos en memoria 
 
 \subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto_af03120d2a26ad27cf43979b059065818}\label{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto_af03120d2a26ad27cf43979b059065818}} 
@@ -26,6 +35,44 @@ def \hyperlink{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto_af03120d2a26
 \subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
 {\footnotesize\ttfamily def Controller.\+Gestor\+Sujeto.\+Gestor\+Sujeto.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
 
+
+
+Constructor de la clase. 
+
+El constructor solo llama a su constructor padre 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto_a1c67d8cc16d790e739b12e48b150d05d}\label{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto_a1c67d8cc16d790e739b12e48b150d05d}} 
+\index{Controller\+::\+Gestor\+Sujeto\+::\+Gestor\+Sujeto@{Controller\+::\+Gestor\+Sujeto\+::\+Gestor\+Sujeto}!Agregar@{Agregar}}
+\index{Agregar@{Agregar}!Controller\+::\+Gestor\+Sujeto\+::\+Gestor\+Sujeto@{Controller\+::\+Gestor\+Sujeto\+::\+Gestor\+Sujeto}}
+\subsubsection{\texorpdfstring{Agregar()}{Agregar()}}
+{\footnotesize\ttfamily def Controller.\+Gestor\+Sujeto.\+Gestor\+Sujeto.\+Agregar (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{dict\+\_\+sujeto }\end{DoxyParamCaption})}
+
+
+
+Metodo Agregar. 
+
+Crea un nuevo sujeto y lo agrega a la lista\+General de su padre 
+\begin{DoxyParams}{Parameters}
+{\em dict\+\_\+sujeto} & diccionario con el nombre y las fotos de un sujeto \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+el retorno del Agregar de la clase padre 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto_af5cd0c01af8ad7d3da5f72ac4d9a93cf}\label{class_controller_1_1_gestor_sujeto_1_1_gestor_sujeto_af5cd0c01af8ad7d3da5f72ac4d9a93cf}} 
+\index{Controller\+::\+Gestor\+Sujeto\+::\+Gestor\+Sujeto@{Controller\+::\+Gestor\+Sujeto\+::\+Gestor\+Sujeto}!get\+All\+Imgs@{get\+All\+Imgs}}
+\index{get\+All\+Imgs@{get\+All\+Imgs}!Controller\+::\+Gestor\+Sujeto\+::\+Gestor\+Sujeto@{Controller\+::\+Gestor\+Sujeto\+::\+Gestor\+Sujeto}}
+\subsubsection{\texorpdfstring{get\+All\+Imgs()}{getAllImgs()}}
+{\footnotesize\ttfamily def Controller.\+Gestor\+Sujeto.\+Gestor\+Sujeto.\+get\+All\+Imgs (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Metodo get\+All\+Imgs. 
+
+Metodo para sacar todas las imagenes de todos los sujetos guardados en memoria \begin{DoxyReturn}{Returns}
+la lista con todas las imagenes 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

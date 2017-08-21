@@ -7,7 +7,9 @@
 \item 
 int \hyperlink{namespace_controller_1_1main_a551a13a2be12ee8db7e027437ded21e7}{contador} = 0
 \item 
-\hyperlink{namespace_controller_1_1main_a6808351aab7a7dabdfde550a30c719b1}{lista} = os.\+listdir(\textquotesingle{}../Images/s1\textquotesingle{})
+list \hyperlink{namespace_controller_1_1main_adc676146e1b9b81c62c7d962e6a09b73}{dirs} = \mbox{[}d for d in os.\+listdir(\textquotesingle{}../Images/\textquotesingle{}) if os.\+path.\+isdir(os.\+path.\+join(\textquotesingle{}../Images/\textquotesingle{}, d))\mbox{]}
+\item 
+\hyperlink{namespace_controller_1_1main_a6808351aab7a7dabdfde550a30c719b1}{lista} = os.\+listdir(\textquotesingle{}../Images/\textquotesingle{})
 \item 
 \hyperlink{namespace_controller_1_1main_ab64b1d5d85baa87feb723b5020958dc9}{numero\+Imagenes} = len(\hyperlink{namespace_controller_1_1main_a6808351aab7a7dabdfde550a30c719b1}{lista})
 \item 
@@ -21,7 +23,7 @@ list \hyperlink{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}{
 \item 
 int \hyperlink{namespace_controller_1_1main_a71a788edfd86f78336518c22203e2bc4}{y} = 1
 \item 
-\hyperlink{namespace_controller_1_1main_a16245faf87dfaee9eec6634fd40179c0}{m} = np.\+cov(\hyperlink{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}{matriz\+Img\+Vec})
+\hyperlink{namespace_controller_1_1main_a16245faf87dfaee9eec6634fd40179c0}{m} = np.\+cov(\mbox{[}\mbox{[}1,2\mbox{]},\mbox{[}3,4\mbox{]}\mbox{]})
 \end{DoxyCompactItemize}
 
 
@@ -37,6 +39,12 @@ int \hyperlink{namespace_controller_1_1main_a71a788edfd86f78336518c22203e2bc4}{y
 \index{contador@{contador}!Controller\+::main@{Controller\+::main}}
 \subsubsection{\texorpdfstring{contador}{contador}}
 {\footnotesize\ttfamily int Controller.\+main.\+contador = 0}
+
+\mbox{\Hypertarget{namespace_controller_1_1main_adc676146e1b9b81c62c7d962e6a09b73}\label{namespace_controller_1_1main_adc676146e1b9b81c62c7d962e6a09b73}} 
+\index{Controller\+::main@{Controller\+::main}!dirs@{dirs}}
+\index{dirs@{dirs}!Controller\+::main@{Controller\+::main}}
+\subsubsection{\texorpdfstring{dirs}{dirs}}
+{\footnotesize\ttfamily list Controller.\+main.\+dirs = \mbox{[}d for d in os.\+listdir(\textquotesingle{}../Images/\textquotesingle{}) if os.\+path.\+isdir(os.\+path.\+join(\textquotesingle{}../Images/\textquotesingle{}, d))\mbox{]}}
 
 \mbox{\Hypertarget{namespace_controller_1_1main_aedd35c1d9c6106eaec585482a5020709}\label{namespace_controller_1_1main_aedd35c1d9c6106eaec585482a5020709}} 
 \index{Controller\+::main@{Controller\+::main}!flat\+\_\+arr@{flat\+\_\+arr}}
@@ -54,13 +62,13 @@ int \hyperlink{namespace_controller_1_1main_a71a788edfd86f78336518c22203e2bc4}{y
 \index{Controller\+::main@{Controller\+::main}!lista@{lista}}
 \index{lista@{lista}!Controller\+::main@{Controller\+::main}}
 \subsubsection{\texorpdfstring{lista}{lista}}
-{\footnotesize\ttfamily Controller.\+main.\+lista = os.\+listdir(\textquotesingle{}../Images/s1\textquotesingle{})}
+{\footnotesize\ttfamily Controller.\+main.\+lista = os.\+listdir(\textquotesingle{}../Images/\textquotesingle{})}
 
 \mbox{\Hypertarget{namespace_controller_1_1main_a16245faf87dfaee9eec6634fd40179c0}\label{namespace_controller_1_1main_a16245faf87dfaee9eec6634fd40179c0}} 
 \index{Controller\+::main@{Controller\+::main}!m@{m}}
 \index{m@{m}!Controller\+::main@{Controller\+::main}}
 \subsubsection{\texorpdfstring{m}{m}}
-{\footnotesize\ttfamily Controller.\+main.\+m = np.\+cov(\hyperlink{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}{matriz\+Img\+Vec})}
+{\footnotesize\ttfamily Controller.\+main.\+m = np.\+cov(\mbox{[}\mbox{[}1,2\mbox{]},\mbox{[}3,4\mbox{]}\mbox{]})}
 
 \mbox{\Hypertarget{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}\label{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}} 
 \index{Controller\+::main@{Controller\+::main}!matriz\+Img\+Vec@{matriz\+Img\+Vec}}

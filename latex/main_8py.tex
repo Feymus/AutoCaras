@@ -12,7 +12,9 @@
 \item 
 int \hyperlink{namespace_controller_1_1main_a551a13a2be12ee8db7e027437ded21e7}{Controller.\+main.\+contador} = 0
 \item 
-\hyperlink{namespace_controller_1_1main_a6808351aab7a7dabdfde550a30c719b1}{Controller.\+main.\+lista} = os.\+listdir(\textquotesingle{}../Images/s1\textquotesingle{})
+list \hyperlink{namespace_controller_1_1main_adc676146e1b9b81c62c7d962e6a09b73}{Controller.\+main.\+dirs} = \mbox{[}d for d in os.\+listdir(\textquotesingle{}../Images/\textquotesingle{}) if os.\+path.\+isdir(os.\+path.\+join(\textquotesingle{}../Images/\textquotesingle{}, d))\mbox{]}
+\item 
+\hyperlink{namespace_controller_1_1main_a6808351aab7a7dabdfde550a30c719b1}{Controller.\+main.\+lista} = os.\+listdir(\textquotesingle{}../Images/\textquotesingle{})
 \item 
 \hyperlink{namespace_controller_1_1main_ab64b1d5d85baa87feb723b5020958dc9}{Controller.\+main.\+numero\+Imagenes} = len(lista)
 \item 
@@ -26,5 +28,5 @@ list \hyperlink{namespace_controller_1_1main_a4272c41c978f6d49bb441a74e2f83b97}{
 \item 
 int \hyperlink{namespace_controller_1_1main_a71a788edfd86f78336518c22203e2bc4}{Controller.\+main.\+y} = 1
 \item 
-\hyperlink{namespace_controller_1_1main_a16245faf87dfaee9eec6634fd40179c0}{Controller.\+main.\+m} = np.\+cov(matriz\+Img\+Vec)
+\hyperlink{namespace_controller_1_1main_a16245faf87dfaee9eec6634fd40179c0}{Controller.\+main.\+m} = np.\+cov(\mbox{[}\mbox{[}1,2\mbox{]},\mbox{[}3,4\mbox{]}\mbox{]})
 \end{DoxyCompactItemize}

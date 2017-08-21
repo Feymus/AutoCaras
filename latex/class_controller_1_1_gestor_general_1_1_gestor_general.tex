@@ -1,5 +1,10 @@
 \hypertarget{class_controller_1_1_gestor_general_1_1_gestor_general}{}\section{Controller.\+Gestor\+General.\+Gestor\+General Class Reference}
 \label{class_controller_1_1_gestor_general_1_1_gestor_general}\index{Controller.\+Gestor\+General.\+Gestor\+General@{Controller.\+Gestor\+General.\+Gestor\+General}}
+
+
+Clase \hyperlink{class_controller_1_1_gestor_general_1_1_gestor_general}{Gestor\+General}.  
+
+
 Inheritance diagram for Controller.\+Gestor\+General.\+Gestor\+General\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,17 +15,17 @@ Inheritance diagram for Controller.\+Gestor\+General.\+Gestor\+General\+:\begin{
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{class_controller_1_1_gestor_general_1_1_gestor_general_ae863157e839c4210ed21da4d237e69ca}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor de la clase. \end{DoxyCompactList}\item 
 def \hyperlink{class_controller_1_1_gestor_general_1_1_gestor_general_a9b620b3b9747d3f976c499d623bb975b}{Agregar} (self, objeto)
-\item 
+\begin{DoxyCompactList}\small\item\em Metodo Agregar. \end{DoxyCompactList}\item 
 def \hyperlink{class_controller_1_1_gestor_general_1_1_gestor_general_a4a1ebb934efd98e4d1ffd065144c0427}{Consultar} (self, objeto)
-\item 
+\begin{DoxyCompactList}\small\item\em Metodo Consultar. \end{DoxyCompactList}\item 
 def \hyperlink{class_controller_1_1_gestor_general_1_1_gestor_general_a15a6db0b2a80304807dbfb1b0ea5a8e7}{Eliminar} (self, objeto)
-\item 
+\begin{DoxyCompactList}\small\item\em Metodo Eliminar. \end{DoxyCompactList}\item 
 def \hyperlink{class_controller_1_1_gestor_general_1_1_gestor_general_a61090b6b006fcc791c2fe55f251405e4}{Modificar} (self, objeto)
-\item 
+\begin{DoxyCompactList}\small\item\em Metodo Modificar. \end{DoxyCompactList}\item 
 def \hyperlink{class_controller_1_1_gestor_general_1_1_gestor_general_af0302d39caf2be664abae8a96594c416}{Get\+Lista\+General} (self)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Metodo Get\+Lista\+General. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,9 +34,9 @@ def \hyperlink{class_controller_1_1_gestor_general_1_1_gestor_general_af0302d39c
 
 
 \subsection{Detailed Description}
-\begin{DoxyVerb}classdocs
-\end{DoxyVerb}
- 
+Clase \hyperlink{class_controller_1_1_gestor_general_1_1_gestor_general}{Gestor\+General}. 
+
+Esta clase es utilizada para el gestion de las listas del controlador 
 
 \subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{class_controller_1_1_gestor_general_1_1_gestor_general_ae863157e839c4210ed21da4d237e69ca}\label{class_controller_1_1_gestor_general_1_1_gestor_general_ae863157e839c4210ed21da4d237e69ca}} 
@@ -42,6 +47,10 @@ def \hyperlink{class_controller_1_1_gestor_general_1_1_gestor_general_af0302d39c
 
 
 
+Constructor de la clase. 
+
+Inicializa la lista de objetos a guardar 
+
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{class_controller_1_1_gestor_general_1_1_gestor_general_a9b620b3b9747d3f976c499d623bb975b}\label{class_controller_1_1_gestor_general_1_1_gestor_general_a9b620b3b9747d3f976c499d623bb975b}} 
 \index{Controller\+::\+Gestor\+General\+::\+Gestor\+General@{Controller\+::\+Gestor\+General\+::\+Gestor\+General}!Agregar@{Agregar}}
@@ -49,30 +58,85 @@ def \hyperlink{class_controller_1_1_gestor_general_1_1_gestor_general_af0302d39c
 \subsubsection{\texorpdfstring{Agregar()}{Agregar()}}
 {\footnotesize\ttfamily def Controller.\+Gestor\+General.\+Gestor\+General.\+Agregar (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{objeto }\end{DoxyParamCaption})}
 
+
+
+Metodo Agregar. 
+
+Metodo simple de agregar a una lista, antes consulta si el objeto ya habia sido agregado antes 
+\begin{DoxyParams}{Parameters}
+{\em objeto} & un objeto cuaquiera para guardar en la lista \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True/\+False dependiendo de si el objeto ya habia sido agregado o no 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_controller_1_1_gestor_general_1_1_gestor_general_a4a1ebb934efd98e4d1ffd065144c0427}\label{class_controller_1_1_gestor_general_1_1_gestor_general_a4a1ebb934efd98e4d1ffd065144c0427}} 
 \index{Controller\+::\+Gestor\+General\+::\+Gestor\+General@{Controller\+::\+Gestor\+General\+::\+Gestor\+General}!Consultar@{Consultar}}
 \index{Consultar@{Consultar}!Controller\+::\+Gestor\+General\+::\+Gestor\+General@{Controller\+::\+Gestor\+General\+::\+Gestor\+General}}
 \subsubsection{\texorpdfstring{Consultar()}{Consultar()}}
 {\footnotesize\ttfamily def Controller.\+Gestor\+General.\+Gestor\+General.\+Consultar (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{objeto }\end{DoxyParamCaption})}
 
+
+
+Metodo Consultar. 
+
+Metodo para consultar un objeto existente en memoria 
+\begin{DoxyParams}{Parameters}
+{\em objeto} & puede ser una instancia de un objeto con el valor primaria con el que se buscara el objeto en la lista \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+objeto encontrado o por el contrario None 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_controller_1_1_gestor_general_1_1_gestor_general_a15a6db0b2a80304807dbfb1b0ea5a8e7}\label{class_controller_1_1_gestor_general_1_1_gestor_general_a15a6db0b2a80304807dbfb1b0ea5a8e7}} 
 \index{Controller\+::\+Gestor\+General\+::\+Gestor\+General@{Controller\+::\+Gestor\+General\+::\+Gestor\+General}!Eliminar@{Eliminar}}
 \index{Eliminar@{Eliminar}!Controller\+::\+Gestor\+General\+::\+Gestor\+General@{Controller\+::\+Gestor\+General\+::\+Gestor\+General}}
 \subsubsection{\texorpdfstring{Eliminar()}{Eliminar()}}
 {\footnotesize\ttfamily def Controller.\+Gestor\+General.\+Gestor\+General.\+Eliminar (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{objeto }\end{DoxyParamCaption})}
 
+
+
+Metodo Eliminar. 
+
+Metodo para eliminar un objeto en la lista\+General 
+\begin{DoxyParams}{Parameters}
+{\em objeto} & puede ser una instancia de un objeto con el valor primaria con el que se buscara el objeto en la lista \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True/\+False segun si el objeto existe o no (antes de ser eliminado) 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_controller_1_1_gestor_general_1_1_gestor_general_af0302d39caf2be664abae8a96594c416}\label{class_controller_1_1_gestor_general_1_1_gestor_general_af0302d39caf2be664abae8a96594c416}} 
 \index{Controller\+::\+Gestor\+General\+::\+Gestor\+General@{Controller\+::\+Gestor\+General\+::\+Gestor\+General}!Get\+Lista\+General@{Get\+Lista\+General}}
 \index{Get\+Lista\+General@{Get\+Lista\+General}!Controller\+::\+Gestor\+General\+::\+Gestor\+General@{Controller\+::\+Gestor\+General\+::\+Gestor\+General}}
 \subsubsection{\texorpdfstring{Get\+Lista\+General()}{GetListaGeneral()}}
 {\footnotesize\ttfamily def Controller.\+Gestor\+General.\+Gestor\+General.\+Get\+Lista\+General (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
 
+
+
+Metodo Get\+Lista\+General. 
+
+Metodo get para devolver la lista general \begin{DoxyReturn}{Returns}
+La lista de objetos que han sido guardados 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_controller_1_1_gestor_general_1_1_gestor_general_a61090b6b006fcc791c2fe55f251405e4}\label{class_controller_1_1_gestor_general_1_1_gestor_general_a61090b6b006fcc791c2fe55f251405e4}} 
 \index{Controller\+::\+Gestor\+General\+::\+Gestor\+General@{Controller\+::\+Gestor\+General\+::\+Gestor\+General}!Modificar@{Modificar}}
 \index{Modificar@{Modificar}!Controller\+::\+Gestor\+General\+::\+Gestor\+General@{Controller\+::\+Gestor\+General\+::\+Gestor\+General}}
 \subsubsection{\texorpdfstring{Modificar()}{Modificar()}}
 {\footnotesize\ttfamily def Controller.\+Gestor\+General.\+Gestor\+General.\+Modificar (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{objeto }\end{DoxyParamCaption})}
 
+
+
+Metodo Modificar. 
+
+Metodo para modificar un objeto 
+\begin{DoxyParams}{Parameters}
+{\em objeto} & puede ser una instancia de un objeto con el valor primaria con el que se buscara el objeto en la lista \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True/\+False segun si el objeto existe o no (antes de modificarlo) 
+\end{DoxyReturn}
 
 
 \subsection{Member Data Documentation}
