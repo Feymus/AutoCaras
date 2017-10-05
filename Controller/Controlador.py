@@ -52,7 +52,6 @@ class Controlador(object):
                 dict_sujeto["fotos"] = []
                 
                 imgspath = imgspath[:_numParaEntrenar]
-                print(imgspath)
                 
                 for img in imgspath:
                     
@@ -76,12 +75,12 @@ class Controlador(object):
         
     def Entrenar(self):
         imgs = self.listaDeSujetos.getAllImgs()
-        matrizImgVec, mean = self.DefinirMatrizDeImagenes(imgs)
-        matrizDeCov = self.DefinirMatrizDeCovarianza(matrizImgVec)
-        auto_valores, auto_vectores = self.DefinirAutoValoresVectores(matrizDeCov, matrizImgVec)
-        pesos = self.DefinirPesos(matrizImgVec, auto_vectores)
-        id = self.Clasificar('C:\\Users\\HP\\Desktop\\TEC\\II Semestre 2017\\Aseguramiento de calidad\\Proyecto\\AutoCaras\\Images\\s20\\6.pgm', mean, auto_vectores, pesos)
-        return self.listaDeSujetos.GetSujetoAt(id)
+        self.matrizImgVec, self.mean = self.DefinirMatrizDeImagenes(imgs)
+        self.matrizDeCov = self.DefinirMatrizDeCovarianza(self.matrizImgVec)
+        self.auto_valores, self.auto_vectores = self.DefinirAutoValoresVectores(self.matrizDeCov, self.matrizImgVec)
+        self.pesos = self.DefinirPesos(self.matrizImgVec, self.auto_vectores)
+        #id = self.Clasificar('C:\\Users\\HP\\Desktop\\TEC\\II Semestre 2017\\Aseguramiento de calidad\\Proyecto\\AutoCaras\\Images\\s36\\6.pgm', self.mean, self.auto_vectores, self.pesos)
+        #return self.listaDeSujetos.GetSujetoAt(id)
 
     ##Funcion que vectoriza una imagen que le entra por parametro
     #@param img recibe la imagen
@@ -95,8 +94,11 @@ class Controlador(object):
     #@return MatrizImgVec es la matriz con todas las imagenes vectorizadas de un sujeto
     def DefinirMatrizDeImagenes(self, listImgs):
         
+       
+        total = len(listImgs[0]) * len(listImgs[0][0])
+        
         numeroImagenes = len(listImgs) #numero de imagenes a recorrer
-        matrizImgVec = np.empty(shape=(10304, numeroImagenes), dtype='float64')#se crea la matriz que contendra las imagenes vectorizadas
+        matrizImgVec = np.empty(shape=(total, numeroImagenes), dtype='float64')#se crea la matriz que contendra las imagenes vectorizadas
         
         
         img_id = 0
@@ -120,10 +122,10 @@ class Controlador(object):
     # @return matrizCov se devuelve la matriz de covarianza calculada 
     def DefinirMatrizDeCovarianza(self, matrizImgVec):
         matrizCov = np.matrix(matrizImgVec.transpose()) * np.matrix(matrizImgVec)                             
-        matrizCov /= len(matrizImgVec[0])
+        np.divide(matrizCov, len(matrizImgVec[0]), out=matrizCov, casting='unsafe')
         return matrizCov
     
-    def DefinirAutoValoresVectores(self, matrizCov, matrizImgVec):
+    def DefinirAutoValoresVectores(self, matrizCov, matrizImgVec, _energia = 0.85):
         
         auto_valores, auto_vectores = np.linalg.eig(matrizCov)
         indices = auto_valores.argsort()[::-1]
@@ -138,7 +140,7 @@ class Controlador(object):
             contador_AV += 1
             energia_AV += auto_valor / suma_AV
 
-            if energia_AV >= 0.85:
+            if energia_AV >= _energia:
                 break
 
         auto_valores = auto_valores[0:contador_AV]
@@ -159,7 +161,7 @@ class Controlador(object):
         img = cv2.imread(img_dir, 0)
         img_col = np.array(img, dtype='float64').flatten()
         img_col -= mean
-        img_col = np.reshape(img_col, (10304, 1))
+        img_col = np.reshape(img_col, (len(img_col), 1))
 
         S = auto_vectores.transpose() * img_col
 

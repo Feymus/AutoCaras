@@ -2,11 +2,12 @@
 #Created on Aug 19, 2017
 #
 #@author: Michael Choque
-#@author: Nelson Gómez
+#@author: Nelson Gomez
 #@author: William Espinoza
 
 import unittest
 from Controller.Controlador import Controlador
+import numpy as np
 
 ## Clase ControladorTest
 #
@@ -32,40 +33,53 @@ class ControladorTest(unittest.TestCase):
 
     ## Metodo test_VectorizarImagen
     #
-    # Prueba del metodo VectorizarImagen en la clase Controlador, la prueba se realiza asegurando que la imagen tenga el tamano correcto
-    # y confirmando el primer y ultimo pixel de a imagen (los cuales pueden variar un poco por las transformacinoes)
+    # Prueba del metodo VectorizarImagen en la clase Controlador, la prueba se realiza asegurando que la imagen se haya aplanado a 1 dimension
+    # y confirmando el tamano final de la imagen
     def test_VectorizarImagen(self):
-        self.foo.CargarImagenes("../Images/")
-        imagenes = self.foo.listaDeSujetos.getAllImgs()
-        result = self.foo.VectorizarImagen(imagenes[0])
-        self.assertEqual(len(result), 10304)
-        self.assertGreaterEqual(result[0], 0)
-        self.assertLessEqual(result[0], 255)
-        self.assertGreaterEqual(result[-1], 0)
-        self.assertLessEqual(result[-1], 255)
+        result = self.foo.VectorizarImagen([[1,2],[3,4]])
+        lista_resultado = np.array([1,2,3,4], dtype='float64')
+        self.assertEqual(result.tolist(), lista_resultado.tolist())
+        self.assertEqual(len(result), 4)
+
     
     ## Metodo test_MatrizDeImagenes
     #
-    # Prueba del metodo DefinirMatrizDeImagenes en la case Controlador, la prueba se realiza asegurando el tamano de la matriz (tanto filas como columnas)
-    # segun la cantidad de imagenes
+    # Prueba del metodo DefinirMatrizDeImagenes en la case Controlador, la prueba se realiza asegurando el resultado de la matriz
+    # segun una lista de "imagenes"
     def test_MatrizDeImagenes(self):
-        self.foo.CargarImagenes("../Images/")
-        imagenes = self.foo.listaDeSujetos.getAllImgs()
-        result = self.foo.DefinirMatrizDeImagenes(imagenes)
-        self.assertEquals(len(result), 10304)
-        self.assertEquals(len(result[0]), 410)
+        imagenes = [[[1,3]],[[20,40]]]
+        result, mean = self.foo.DefinirMatrizDeImagenes(imagenes)
+        self.assertEquals(result.tolist(), [[-9.5, 9.5], [-18.5, 18.5]])
+        self.assertEquals(mean.tolist(), [10.5, 21.5])
+
     
     ## Metodo test_MatrizDeCovarianza
     #
-    # Prueba del metodo DefinirMatrizDeCovarianza en la case Controlador, la prueba se realiza asegurando el tamano de la matriz (tanto filas como columnas)
-    # segun la cantidad de imagenes, la cual siempre debera de ser 10304*10304
+    # Prueba del metodo DefinirMatrizDeCovarianza en la case Controlador, la prueba se realiza asegurando el resultado de la matriz
+    # segun la cantidad de "imagenes"
     def test_MatrizDeCovarianza(self):
+        result = self.foo.DefinirMatrizDeCovarianza(np.matrix([[-9.5, 9.5], [-18.5, 18.5]]))
+        self.assertEquals(result.tolist(), [[432.5, -432.5], [-432.5, 432.5]])
+        self.assertEquals(len(result), 2)
+    
+    def test_AutoValoresVectores(self):
+        matriz_cov = np.matrix([[432.5, -432.5], [-432.5, 432.5]])
+        matriz_img = np.matrix([[-9.5, 9.5], [-18.5, 18.5]])
+        result_auto_valores, result_auto_vectores = self.foo.DefinirAutoValoresVectores(matriz_cov, matriz_img)
+        self.assertEquals(result_auto_valores.tolist(), [865.0])
+        self.assertEquals(result_auto_vectores.tolist(), [[-0.4472135954999579], [-0.8944271909999159]])
+
+    def test_Pesos(self):
+        matriz_img = np.matrix([[-9.5, 9.5], [-18.5, 18.5]])
+        auto_vectores = np.matrix([[-0.4472135954999579], [-0.8944271909999159]])
+        result = self.foo.DefinirPesos(matriz_img, auto_vectores)
+        self.assertEquals(result.tolist(), [[20.79543219074804, -20.79543219074804]])
+        
+    def test_Clasificar(self):
         self.foo.CargarImagenes("../Images/")
-        imagenes = self.foo.listaDeSujetos.getAllImgs()
-        matrizImgVec = self.foo.DefinirMatrizDeImagenes(imagenes)
-        result = self.foo.DefinirMatrizDeCovarianza(matrizImgVec)
-        self.assertEquals(len(result), 10304)
-        self.assertEquals(len(result[0]), 10304)
+        self.foo.Entrenar()
+        sujeto = self.foo.Clasificar("../Images/s36/6.pgm", self.foo.mean, self.foo.auto_vectores, self.foo.pesos)
+        self.foo.listaDeSujetos.GetSujetoAt(sujeto)
 
 
 if __name__ == "__main__":
