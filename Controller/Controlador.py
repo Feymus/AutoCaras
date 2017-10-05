@@ -33,7 +33,7 @@ class Controlador(object):
     # @return una tupla con informacion de si se realizo bien o mal
     # Ejm de una ruta valida:
     # direccion valida C:/Users/HP/Desktop/TEC/II Semestre 2017/Aseguramiento de calidad/Proyecto/AutoCaras/Images
-    def CargarImagenes(self, img_url):
+    def CargarImagenes(self, img_url, _numParaEntrenar = 6):
 
         try:
             # Se saca todos los nombres de carpetas en la ruta dada, estos pasan a ser los nombres de los sujetos
@@ -48,6 +48,9 @@ class Controlador(object):
                 dict_sujeto = {}
                 dict_sujeto["nombre"] = sujeto
                 dict_sujeto["fotos"] = []
+                
+                imgspath = imgspath[:_numParaEntrenar]
+                print(imgspath)
                 
                 for img in imgspath:
                     
@@ -75,7 +78,7 @@ class Controlador(object):
         matrizDeCov = self.DefinirMatrizDeCovarianza(matrizImgVec)
         auto_valores, auto_vectores = self.DefinirAutoValoresVectores(matrizDeCov, matrizImgVec)
         pesos = self.DefinirPesos(matrizImgVec, auto_vectores)
-        id = self.Clasificar('C:\\Users\\HP\\Desktop\\TEC\\II Semestre 2017\\Aseguramiento de calidad\\Proyecto\\AutoCaras\\Images\\s26\\10.pgm', mean, auto_vectores, pesos)
+        id = self.Clasificar('C:\\Users\\HP\\Desktop\\TEC\\II Semestre 2017\\Aseguramiento de calidad\\Proyecto\\AutoCaras\\Images\\s20\\10.pgm', mean, auto_vectores, pesos)
         return self.listaDeSujetos.GetSujetoAt(id)
 
     ##Funcion que vectoriza una imagen que le entra por parametro
