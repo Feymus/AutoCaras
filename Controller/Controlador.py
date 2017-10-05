@@ -40,7 +40,6 @@ class Controlador(object):
             sujetos = [sujeto for sujeto in os.listdir(img_url) 
                             if os.path.isdir(os.path.join(img_url, sujeto))]
             
-            print(sujetos)
 
             for sujeto in sujetos:
 
@@ -53,17 +52,16 @@ class Controlador(object):
                 for img in imgspath:
                     
                     # Por ruta de imagen, la abrimos y transformamos la imagen
-                    if (img != "10.pgm"):
-                        path = img_url + '/' + sujeto + '/' + img
-                        arr = cv2.imread(path, 0) # Matriz de una imagen en escala de grises
-                        arr = cv2.resize(arr, (112, 92)) # Reescalamos la imagen para que sea 112*92
-                        dict_sujeto["fotos"].append(arr)
+                    path = img_url + '/' + sujeto + '/' + img
+                    arr = cv2.imread(path, 0) # Matriz de una imagen en escala de grises
+                    #arr = cv2.resize(arr, (112, 92)) # Reescalamos la imagen para que sea 112*92
+                    dict_sujeto["fotos"].append(arr)
                         
-                        # Se guarda el sujeto y sus imagenes en memoria
-                        self.AgregarSujeto(dict_sujeto)
+                    # Se guarda el sujeto y sus imagenes en memoria
+                    self.AgregarSujeto(dict_sujeto)
 
             return (0, "Carga completada!") 
-        
+
         except FileNotFoundError as FNF:
             print(FNF)
             return (-1, "Error: Direccion no encontrada")
@@ -77,15 +75,14 @@ class Controlador(object):
         matrizDeCov = self.DefinirMatrizDeCovarianza(matrizImgVec)
         auto_valores, auto_vectores = self.DefinirAutoValoresVectores(matrizDeCov, matrizImgVec)
         pesos = self.DefinirPesos(matrizImgVec, auto_vectores)
-        print(pesos)
-        id = self.Clasificar('C:\\Users\\HP\\Desktop\\TEC\\II Semestre 2017\\Aseguramiento de calidad\\Proyecto\\AutoCaras\\Images\\s41\\10.pgm', mean, auto_vectores, pesos)
+        id = self.Clasificar('C:\\Users\\HP\\Desktop\\TEC\\II Semestre 2017\\Aseguramiento de calidad\\Proyecto\\AutoCaras\\Images\\s26\\10.pgm', mean, auto_vectores, pesos)
         return self.listaDeSujetos.GetSujetoAt(id)
 
     ##Funcion que vectoriza una imagen que le entra por parametro
     #@param img recibe la imagen
     #@return flat_img devuelve la lista de una imagen vectorizada.
     def VectorizarImagen(self, img):
-        flat_img = img.ravel() # Vectorizacion de una matriz
+        flat_img = np.array(img, dtype='float64').flatten() # Vectorizacion de una matriz
         return flat_img
     
     ##Funcion que crea la matriz con las imagenes vectorizadas
@@ -94,8 +91,7 @@ class Controlador(object):
     def DefinirMatrizDeImagenes(self, listImgs):
         
         numeroImagenes = len(listImgs) #numero de imagenes a recorrer
-        print(numeroImagenes)
-        matrizImgVec = np.empty(shape=(10304, numeroImagenes))#se crea la matriz que contendra las imagenes vectorizadas
+        matrizImgVec = np.empty(shape=(10304, numeroImagenes), dtype='float64')#se crea la matriz que contendra las imagenes vectorizadas
         
         
         img_id = 0
@@ -144,9 +140,9 @@ class Controlador(object):
         auto_vectores = auto_vectores[0:contador_AV]
 
         auto_vectores = auto_vectores.transpose()
-        auto_vectores = matrizImgVec * auto_vectores                            
-        norms = np.linalg.norm(auto_vectores, axis=0)                           
-        auto_vectores = auto_vectores / norms                                   
+        auto_vectores = matrizImgVec * auto_vectores
+        norms = np.linalg.norm(auto_vectores, axis=0)
+        auto_vectores = auto_vectores / norms
 
         return (auto_valores, auto_vectores)
     
@@ -166,6 +162,6 @@ class Controlador(object):
         norms = np.linalg.norm(diff, axis=0)
 
         id_cercano = np.argmin(norms)
-        return (id_cercano // 9) + 1
+        return (id_cercano // 10) + 1
 
     
