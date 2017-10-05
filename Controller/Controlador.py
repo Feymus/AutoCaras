@@ -2,7 +2,7 @@
 #Created on Aug 16, 2017
 #
 #@author: Michael Choque
-#@author: Nelson Gómez
+#@author: Nelson Gomez
 #@author: William Espinoza
 
 from Controller.GestorSujeto import GestorSujeto
@@ -34,6 +34,8 @@ class Controlador(object):
     # Ejm de una ruta valida:
     # direccion valida C:/Users/HP/Desktop/TEC/II Semestre 2017/Aseguramiento de calidad/Proyecto/AutoCaras/Images
     def CargarImagenes(self, img_url, _numParaEntrenar = 6):
+        
+        self.numParaEntrenar = _numParaEntrenar
 
         try:
             # Se saca todos los nombres de carpetas en la ruta dada, estos pasan a ser los nombres de los sujetos
@@ -78,7 +80,7 @@ class Controlador(object):
         matrizDeCov = self.DefinirMatrizDeCovarianza(matrizImgVec)
         auto_valores, auto_vectores = self.DefinirAutoValoresVectores(matrizDeCov, matrizImgVec)
         pesos = self.DefinirPesos(matrizImgVec, auto_vectores)
-        id = self.Clasificar('C:\\Users\\HP\\Desktop\\TEC\\II Semestre 2017\\Aseguramiento de calidad\\Proyecto\\AutoCaras\\Images\\s20\\10.pgm', mean, auto_vectores, pesos)
+        id = self.Clasificar('C:\\Users\\HP\\Desktop\\TEC\\II Semestre 2017\\Aseguramiento de calidad\\Proyecto\\AutoCaras\\Images\\s20\\6.pgm', mean, auto_vectores, pesos)
         return self.listaDeSujetos.GetSujetoAt(id)
 
     ##Funcion que vectoriza una imagen que le entra por parametro
@@ -136,8 +138,8 @@ class Controlador(object):
             contador_AV += 1
             energia_AV += auto_valor / suma_AV
 
-            #if energia_AV >= 0.85:
-            #    break
+            if energia_AV >= 0.85:
+                break
 
         auto_valores = auto_valores[0:contador_AV]
         auto_vectores = auto_vectores[0:contador_AV]
@@ -156,7 +158,7 @@ class Controlador(object):
         
         img = cv2.imread(img_dir, 0)
         img_col = np.array(img, dtype='float64').flatten()
-        img_col[:] -= mean[:]
+        img_col -= mean
         img_col = np.reshape(img_col, (10304, 1))
 
         S = auto_vectores.transpose() * img_col
@@ -165,6 +167,6 @@ class Controlador(object):
         norms = np.linalg.norm(diff, axis=0)
 
         id_cercano = np.argmin(norms)
-        return (id_cercano // 10) + 1
+        return (id_cercano // self.numParaEntrenar) + 1
 
     
