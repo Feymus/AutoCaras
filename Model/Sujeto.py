@@ -32,6 +32,9 @@ class Sujeto(object):
     def GetListaFotos(self):
         return self.listaFotos
     
+    def GetNombre(self):
+        return self.nombre
+    
     ## Metodo SetListaFotos
     # 
     # Metodo set para la lista de fotos un sujeto

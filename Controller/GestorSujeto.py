@@ -41,4 +41,14 @@ class GestorSujeto(GestorGeneral):
             listaImagenes += sujeto.GetListaFotos()
             
         return listaImagenes
+    
+    def GetSujetoAt(self, id):
+        contador = 0
+        for sujeto in self.listaGeneral:
+
+            if(contador == id-1):
+                print("Si, ", contador, " - ", sujeto.GetNombre())
+            else:
+                print("No, ", contador, " - ", sujeto.GetNombre())
+            contador += 1
         

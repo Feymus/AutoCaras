@@ -2,7 +2,7 @@
 #Created on Aug 20, 2017
 #
 #@author: Michael Choque
-#@author: Nelson Gómez
+#@author: Nelson Gomez
 #@author: William Espinoza
 
 from flask import Flask
