@@ -1,70 +1,67 @@
-##@package docstring
+"Clase madre a partir de la cual heredan los demas gestores. Contiene las operaciones basicas CRUD"
 #Created on Aug 16, 2017
-#
+
 #@author: Michael Choque
-#@author: Nelson Gómez
+#@author: Nelson Gomez
 #@author: William Espinoza
 
 
 ## Clase GestorGeneral
 #
-# Esta clase es utilizada para el gestion de las listas del controlador
-class GestorGeneral(object):
 
-    ## Constructor de la clase 
+class GestorGeneral(object):
+    "Esta clase es utilizada para el gestion de las listas del controlador"
+    ## Constructor de la clase
     #
     # Inicializa la lista de objetos a guardar
     def __init__(self):
-        self.listaGeneral = []
-    
-    ## Metodo Agregar
-    #
-    # Metodo simple de agregar a una lista, antes consulta si el objeto ya habia sido agregado antes
-    # @param objeto un objeto cuaquiera para guardar en la lista
-    # @return True/False dependiendo de si el objeto ya habia sido agregado o no
-    def Agregar(self, objeto):
-        if self.Consultar(objeto) == None:
-            self.listaGeneral.append(objeto)
+        self.lista_general = []
+    def agregar(self, objeto):
+        """ Metodo Agregar
+     Metodo simple de agregar a una lista, antes consulta si el objeto ya habia sido agregado antes
+     @param objeto un objeto cuaquiera para guardar en la lista
+     @return True/False dependiendo de si el objeto ya habia sido agregado o no"""
+        if self.consultar(objeto) is None:
+            self.lista_general.append(objeto)
             return True
         return False
-    
-    ## Metodo Consultar
-    #
+    def consultar(self, objeto):
+        """Metodo Consultar
     # Metodo para consultar un objeto existente en memoria
-    # @param objeto puede ser una instancia de un objeto con el valor primaria con el que se buscara el objeto en la lista
-    # @return objeto encontrado o por el contrario None
-    def Consultar(self, objeto):
-        if objeto in self.listaGeneral:
-            pos = self.listaGeneral.index(objeto)
-            return self.listaGeneral[pos]
+    # @param objeto puede ser una instancia de un objeto con el valor primario
+    # con el que se buscara el objeto en la lista
+    # @return objeto encontrado o por el contrario None"""
+        if objeto in self.lista_general:
+            pos = self.lista_general.index(objeto)
+            return self.lista_general[pos]
         return None
-    
-    ## Metodo Eliminar
+    def eliminar(self, objeto):
+        """## Metodo Eliminar
     #
     # Metodo para eliminar un objeto en la listaGeneral
-    # @param objeto puede ser una instancia de un objeto con el valor primaria con el que se buscara el objeto en la lista
-    # @return True/False segun si el objeto existe o no (antes de ser eliminado)
-    def Eliminar(self, objeto):
-        if not self.Consultar(objeto) == None:
-            self.listaGeneral.remove(objeto)
+    # @param objeto puede ser una instancia de un objeto con el valor primaria con
+    el que se buscara el objeto en la lista
+    # @return True/False segun si el objeto existe o no (antes de ser eliminado)"""
+        if not self.consultar(objeto) is None:
+            self.lista_general.remove(objeto)
             return True
         return False
-    
-    ## Metodo Modificar
-    #
+
+    def modificar(self, objeto):
+        """## Metodo Modificar
     # Metodo para modificar un objeto
-    # @param objeto puede ser una instancia de un objeto con el valor primaria con el que se buscara el objeto en la lista
-    # @return True/False segun si el objeto existe o no (antes de modificarlo)
-    def Modificar(self, objeto):
-        if objeto in self.listaGeneral:
-            pos = self.listaGeneral.index(objeto)
-            self.listaGeneral[pos] = objeto
+    # @param objeto puede ser una instancia de un objeto con el valor
+    primaria con el que se buscara el objeto en la lista
+    # @return True/False segun si el objeto existe o no (antes de modificarlo)"""
+        if objeto in self.lista_general:
+            pos = self.lista_general.index(objeto)
+            self.lista_general[pos] = objeto
             return True
         return False
-    
-    ## Metodo GetListaGeneral
+    def get_lista_general(self):
+        """## Metodo GetListaGeneral
     #
     # Metodo get para devolver la lista general
-    # @return La lista de objetos que han sido guardados
-    def GetListaGeneral(self):
-        return self.listaGeneral
+    # @return La lista de objetos que han sido guardados"""
+        return self.lista_general
+    
