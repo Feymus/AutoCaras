@@ -1,50 +1,43 @@
-##@package docstring
+"""Este modulo inicia una instancia del servidor Flask
+en la cual se hospeda la pagina donde se ingresa el directorio con las imagenes
+a utilzar"""
 #Created on Aug 20, 2017
 #
 #@author: Michael Choque
 #@author: Nelson Gomez
 #@author: William Espinoza
-
+from __future__ import print_function
 from flask import Flask
 from flask import request
 from flask import jsonify
 from Controller.Controlador import Controlador
-
-
 ## Controlador de la aplicacion
-controlador = Controlador()
+CONTROLADOR = Controlador()
 ## Servidor de la aplicacion
-app = Flask(__name__, static_url_path='')
-
-
+APP = Flask(__name__, static_url_path='')
 ## Metodo main_index
 #
-# Este metodo manda el script principal de la pagina a la direccion http://127.0.0.1:5000/
-@app.route('/')
+@APP.route('/')
 def main_index():
-    return app.send_static_file('index.html')
-
+    """# Este metodo manda el script principal de la pagina a la direccion http://127.0.0.1:5000/"""
+    return APP.send_static_file('index.html')
 ## Metodo submit_imgs_dir
 #
-# Recibe por POST la direccion local de los sujetos a cargar a la aplicacion
-@app.route('/cargaimgs', methods=['GET', 'POST'])
+@APP.route('/cargaimgs', methods=['GET', 'POST'])
 def submit_imgs_dir():
+    """# Recibe por POST la direccion local de los sujetos a cargar a la aplicacion"""
     if request.method == 'POST':
         img_url = request.form['img_url']
-        estado = controlador.CargarImagenes(img_url)
-        
-        respuesta = jsonify( 
+        estado = CONTROLADOR.cargar_imagenes(img_url)
+        respuesta = jsonify(
             status=estado[0],
             msg=estado[1]
         )
-        
         if estado[0] == 0:
-            print(controlador.Entrenar())
+            print(CONTROLADOR.entrenar())
             return respuesta
         return respuesta
-    return app.send_static_file('index.html')
-
-
-
+    return APP.send_static_file('index.html')
 if __name__ == '__main__':
-    app.run()
+    APP.run()
+    
