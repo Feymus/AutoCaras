@@ -22,7 +22,6 @@ class Controlador(object):
     y la interfaz de usuario"""
     def __init__(self):
         '''Constructor de la clase
-    
         El constructor unicamente inicializa la lista de Sujetos en la aplicacion'''
         self.lista_de_sujetos = GestorSujeto()
         self.num_para_entrenar = None
@@ -208,7 +207,9 @@ class Controlador(object):
         self.mean = np.loadtxt('../datos/entrenamientos/' + nbr_mean, dtype='float64')
         nbr_pesos = ent_prefix + "_proyecciones.txt"
         self.pesos = np.matrix(np.loadtxt('../datos/entrenamientos/' + nbr_pesos, dtype='float64'))
-    def get_precision(self):
+    def get_precision(self):""" Carga un conjunto de muestras prueba midiendo presicion del sistema
+        @param null
+        @return null""""
         file = open("../datos/pruebas/precision.csv", 'wt')
         writer = csv.writer(file)
         sujetos = [sujeto for sujeto in os.listdir(self.url_sujetos)
@@ -233,13 +234,17 @@ class Controlador(object):
             writer.writerow(('Falsos positivos', fn))
             writer.writerow(('Falsos negativos', fp))
         file.close()
-    def armar_tabla_de_clases(self, sujetos):
+    def armar_tabla_de_clases(self, sujetos): """ Armar la tabla de clases 
+        @param sujetos
+        @return tabla de clases"""
         tabla_de_clases = [[0]]
         for sujeto in sujetos:
             tabla_de_clases[0] += [sujeto]
             tabla_de_clases += [[sujeto] + [0] * len(sujetos)]
         return tabla_de_clases
-    def agregar_a_tabla(self, tabla, sujeto_clasificado, sujeto_verdadero):
+    def agregar_a_tabla(self, tabla, sujeto_clasificado, sujeto_verdadero): """ Agrega a la tabla de falsos positivos y negavitos
+        @param sujeto clasificado y sujeto verdadero
+        @return la tabla"""
         encontrado = False
         for fila in range(1, len(tabla)):
             if (tabla[fila][0] == sujeto_clasificado):
@@ -251,7 +256,10 @@ class Controlador(object):
             if (encontrado == True):
                 break
         return tabla
-    def evaluacion_de_clase(self, tabla, sujeto):
+    def evaluacion_de_clase(self, tabla, sujeto): """ evalua la tabla respecto a los sujetos  
+        @param la tabla y los sujetos 
+        @return el resultado de la tabla  
+        """
         encontrado = False
         precision = 0
         recall = 0
@@ -271,13 +279,17 @@ class Controlador(object):
         if (verdaderos_positivos + falsos_negativos != 0):
             recall = 100 * verdaderos_positivos / (verdaderos_positivos + falsos_negativos)
         return (precision, recall, falsos_positivos, falsos_negativos)
-    def get_falsos_positivos(self, tabla, fila, columna):
+    def get_falsos_positivos(self, tabla, fila, columna): """Obtiene los falsos positivos
+        @param la tabla, el numero de la fila y columna
+        @return los falsos positivos  """
         falsos_positivos = 0
         for ccolumna in range(1, len(tabla[0])):
             if (ccolumna != columna):
                 falsos_positivos += tabla[fila][ccolumna]
         return falsos_positivos
-    def get_falsos_negativos(self, tabla, fila, columna):
+    def get_falsos_negativos(self, tabla, fila, columna): """ Obtiene los falsos negativos
+        @param tabla, el numero de la fila y columna
+        @return  falsos negativos"""
         falsos_negativos = 0
         for ffila in range(1, len(tabla)):
             if (ffila != fila):
