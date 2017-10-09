@@ -19,7 +19,7 @@ class GestorGeneral(object):
     def agregar(self, objeto):
         """ Metodo Agregar
      Metodo simple de agregar a una lista, antes consulta si el objeto ya habia sido agregado antes
-     @param objeto un objeto cuaquiera para guardar en la lista
+     @param objeto un objeto cuaquiera para guardar en  la lista
      @return True/False dependiendo de si el objeto ya habia sido agregado o no"""
         if self.consultar(objeto) is None:
             self.lista_general.append(objeto)

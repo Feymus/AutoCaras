@@ -24,7 +24,7 @@ class GestorSujeto(GestorGeneral):
     # Crea un nuevo sujeto y lo agrega a la lista_general de su padre
     # @param dict_sujeto diccionario con el nombre y las fotos de un sujeto
     # @return el retorno del Agregar de la clase padre
-    def agregar(self, objeto):
+    def agregar(self, objeto):""" Gestor de sujetos """
         sujeto_nuevo = Sujeto(objeto["nombre"])
         sujeto_nuevo.set_lista_fotos(objeto["fotos"])
         return GestorGeneral.agregar(self, sujeto_nuevo)

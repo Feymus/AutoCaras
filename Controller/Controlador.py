@@ -15,7 +15,7 @@ import numpy as np
 class Controlador(object):
     # pylint: disable=too-many-instance-attributes
     #se considera que los 9 atributos son necesarios
-    """ Clase controlador
+    """ Clase de controlador
     
     Esta clase es la que permite la comunicacion entre los datos de la aplicacion
     y la interfaz de usuario"""
@@ -79,7 +79,10 @@ class Controlador(object):
             return (-1, "Error: Desconocido")
     def entrenar(self, ent_prefix, energy_pct):
         """Genera una base de conocimiento contra la cual se van a comparar
-        las imagenes a clasificar"""
+        las imagenes a clasificar
+        @param un prefijo de como será guardada la imagen y la cantidad de autovectores a conservar
+        @return un numero que indicar el estado y un mensaje"""
+        
         try:
             imgs = self.lista_de_sujetos.get_all_imgs()
             self.matriz_img_vec, self.mean = self.definir_matriz_de_imagenes(imgs)
@@ -133,7 +136,9 @@ class Controlador(object):
         return matriz_cov
     def definir_auto_valores_vectores(self, matriz_cov, matriz_img_vec, _energia=0.85):
         """Recibe como parametros una matriz de covarianza junto a su respectiva matriz
-        de imagenes vectorizadas"""
+        de imagenes vectorizadas
+        @param matriz de covarianza, matriz de imagenes vectorizadas y cantidad de autovectores a conservar
+        @return tupla con autovalores y autovectores"""
         auto_valores, auto_vectores = np.linalg.eig(matriz_cov)
         indices = auto_valores.argsort()[::-1]
         auto_valores = auto_valores[indices]
@@ -155,11 +160,15 @@ class Controlador(object):
         return (auto_valores, auto_vectores)
     def definir_pesos(self, matriz_img_vec, auto_vectores):
         """Determina el peso de los autovectores. Recibe como parametros
-        una matriz con imagenes vectorizdas y una matriz con sus respectivos autovectores"""
+        una matriz con imagenes vectorizdas y una matriz con sus respectivos autovectores
+        @param matriz de imagenes vectorizadas, auto vectores
+        @return el peso"""
         return auto_vectores.transpose() * matriz_img_vec
     def clasificar(self, img_dir, ent_prefix):
         """Recibe como parametros el directorio de la imagen a clasficar, la imagen media
-        de las imagenes de entrenamiento, una matriz de autovectores y los pesos de estos"""
+        de las imagenes de entrenamiento, una matriz de autovectores y los pesos de estos
+        @param directorio de imagen a clasificar, la imagen media de las imagenes de entrenamiento
+        @return id_cercano"""
         #pylint: disable=maybe-no-member
         self.cargar_entrenamiento(ent_prefix)
         img = cv2.imread(img_dir, 0)
@@ -171,14 +180,21 @@ class Controlador(object):
         norms = np.linalg.norm(diff, axis=0)
         id_cercano = np.argmin(norms)
         return (id_cercano // self.num_para_entrenar) + 1
-    def guardar_entrenamiento(self, ent_prefix):
+    def guardar_entrenamiento(self, ent_prefix):"""
+    Guarda el sujeto que se entreno en el sistema
+    @param el prefijo que fue escrito
+    @return ...
+    """"
         nbr_auto_vectores = ent_prefix + "_auto_caras.txt"
         np.savetxt('../datos/entrenamientos/' + nbr_auto_vectores, self.auto_vectores)
         nbr_mean = ent_prefix + "_mean.txt"
         np.savetxt('../datos/entrenamientos/' + nbr_mean, self.mean)
         nbr_pesos = ent_prefix + "_proyecciones.txt"
         np.savetxt('../datos/entrenamientos/' + nbr_pesos, self.pesos)
-    def cargar_entrenamiento(self, ent_prefix):
+    def cargar_entrenamiento(self, ent_prefix):"""
+    Toma los datos de los archivos .txt y los pone en sus respectivas variables
+    @param el prefijo
+    @return ...   """
         nbr_auto_vectores = ent_prefix + "_auto_caras.txt"
         self.auto_vectores = np.matrix(np.loadtxt('../datos/entrenamientos/' + nbr_auto_vectores, dtype='float64'))
         nbr_mean = ent_prefix + "_mean.txt"
