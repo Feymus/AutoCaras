@@ -15,7 +15,8 @@ class Facade(object):
         self.controlador = Controlador()
         
     
-    def entrenar(self, img_url, _num_para_entrenar=6): """funcion de entrenar sujeto 
+    def entrenar(self, img_url, _num_para_entrenar=6): 
+        """funcion de entrenar sujeto 
         @param recibe el url, y el numero de imagenes que se usan para el entrenamiento
         @estado y mensaje """
         result = self.controlador.cargar_imagenes(img_url, _num_para_entrenar)

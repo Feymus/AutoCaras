@@ -24,7 +24,8 @@ class GestorSujeto(GestorGeneral):
     # Crea un nuevo sujeto y lo agrega a la lista_general de su padre
     # @param dict_sujeto diccionario con el nombre y las fotos de un sujeto
     # @return el retorno del Agregar de la clase padre
-    def agregar(self, objeto):""" Gestor de sujetos """
+    def agregar(self, objeto):
+        """ Gestor de sujetos """
         sujeto_nuevo = Sujeto(objeto["nombre"])
         sujeto_nuevo.set_lista_fotos(objeto["fotos"])
         return GestorGeneral.agregar(self, sujeto_nuevo)
@@ -43,8 +44,7 @@ class GestorSujeto(GestorGeneral):
         contador = 0
         for sujeto in self.lista_general:
             if contador == id_sujeto-1:
-                print("Si, ", contador, " - ", sujeto.get_nombre())
-            else:
-                print("No, ", contador, " - ", sujeto.get_nombre())
+                return (0, sujeto.get_nombre())
             contador += 1
+        return (-1, "Sujeto no encontrado...")
         

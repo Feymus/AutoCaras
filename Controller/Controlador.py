@@ -10,12 +10,13 @@ import os
 import cv2
 from Controller.GestorSujeto import GestorSujeto
 import numpy as np
+import csv
 
 
 class Controlador(object):
     # pylint: disable=too-many-instance-attributes
-    #se considera que los 9 atributos son necesarios
-    """ Clase de controlador
+    #se considera que los 10 atributos son necesarios
+    """ Clase controlador
     
     Esta clase es la que permite la comunicacion entre los datos de la aplicacion
     y la interfaz de usuario"""
@@ -32,6 +33,8 @@ class Controlador(object):
         self.auto_vectores = None
         self.pesos = None
         self.de_entrenamiento = None
+        self.num_sujetos = None
+        self.url_sujetos = None
     def agregar_sujeto(self, dict_sujeto):
         """ Metodo agregar_sujeto
         @param dict_sujeto un diccionario con el nombre del sujeto y una lista con sus imagenes
@@ -44,12 +47,15 @@ class Controlador(object):
         @return una tupla con informacion de si se realizo bien o mal
         Ejm de una ruta valida:
         C:/Users/HP/Desktop/TEC/II Semestre 2017/Aseguramiento de calidad/Proyecto/AutoCaras/Images"""
+        self.lista_de_sujetos = GestorSujeto()
         self.num_para_entrenar = _num_para_entrenar
+        self.url_sujetos = img_url
         try:
             # Se saca todos los nombres de carpetas en la ruta dada, estos pasan a ser
             #los nombres de los sujetos
             sujetos = [sujeto for sujeto in os.listdir(img_url)
                        if os.path.isdir(os.path.join(img_url, sujeto))]
+            self.num_sujetos = len(sujetos)
             for sujeto in sujetos:
                 #Ahora por cada sujeto se sacan los nombres de las imagenes en su respectiva carpeta
                 imgspath = os.listdir(img_url + '/' + sujeto)
@@ -95,7 +101,6 @@ class Controlador(object):
                 self.guardar_entrenamiento(ent_prefix)
             else:
                 self.guardar_entrenamiento("ent")
-            self.lista_de_sujetos = GestorSujeto()
             return (0, "Entrenamiento completado!")
         except Exception as exception:
             print ("El error '{0}' ha ocurrido. Argumentos {1}.".format(exception.message, exception.args))
@@ -164,13 +169,14 @@ class Controlador(object):
         @param matriz de imagenes vectorizadas, auto vectores
         @return el peso"""
         return auto_vectores.transpose() * matriz_img_vec
-    def clasificar(self, img_dir, ent_prefix):
+    def clasificar(self, img_dir, ent_prefix, cargar_entrenamiento):
         """Recibe como parametros el directorio de la imagen a clasficar, la imagen media
         de las imagenes de entrenamiento, una matriz de autovectores y los pesos de estos
         @param directorio de imagen a clasificar, la imagen media de las imagenes de entrenamiento
         @return id_cercano"""
         #pylint: disable=maybe-no-member
-        self.cargar_entrenamiento(ent_prefix)
+        if (cargar_entrenamiento == True):
+            self.cargar_entrenamiento(ent_prefix)
         img = cv2.imread(img_dir, 0)
         img_col = np.array(img, dtype='float64').flatten()
         img_col -= self.mean
@@ -180,24 +186,100 @@ class Controlador(object):
         norms = np.linalg.norm(diff, axis=0)
         id_cercano = np.argmin(norms)
         return (id_cercano // self.num_para_entrenar) + 1
-    def guardar_entrenamiento(self, ent_prefix):"""
-    Guarda el sujeto que se entreno en el sistema
-    @param el prefijo que fue escrito
-    @return ...
-    """"
+    def guardar_entrenamiento(self, ent_prefix):
+        '''
+        Guarda el sujeto que se entreno en el sistema
+        @param el prefijo que fue escrito
+        @return ...'''
         nbr_auto_vectores = ent_prefix + "_auto_caras.txt"
         np.savetxt('../datos/entrenamientos/' + nbr_auto_vectores, self.auto_vectores)
         nbr_mean = ent_prefix + "_mean.txt"
         np.savetxt('../datos/entrenamientos/' + nbr_mean, self.mean)
         nbr_pesos = ent_prefix + "_proyecciones.txt"
         np.savetxt('../datos/entrenamientos/' + nbr_pesos, self.pesos)
-    def cargar_entrenamiento(self, ent_prefix):"""
-    Toma los datos de los archivos .txt y los pone en sus respectivas variables
-    @param el prefijo
-    @return ...   """
+    def cargar_entrenamiento(self, ent_prefix):
+        """
+        Toma los datos de los archivos .txt y los pone en sus respectivas variables
+        @param el prefijo
+        @return ...   """
         nbr_auto_vectores = ent_prefix + "_auto_caras.txt"
         self.auto_vectores = np.matrix(np.loadtxt('../datos/entrenamientos/' + nbr_auto_vectores, dtype='float64'))
         nbr_mean = ent_prefix + "_mean.txt"
         self.mean = np.loadtxt('../datos/entrenamientos/' + nbr_mean, dtype='float64')
         nbr_pesos = ent_prefix + "_proyecciones.txt"
         self.pesos = np.matrix(np.loadtxt('../datos/entrenamientos/' + nbr_pesos, dtype='float64'))
+    def get_precision(self):
+        file = open("../datos/pruebas/precision.csv", 'wt')
+        writer = csv.writer(file)
+        sujetos = [sujeto for sujeto in os.listdir(self.url_sujetos)
+                       if os.path.isdir(os.path.join(self.url_sujetos, sujeto))]
+        tabla_de_clases = self.armar_tabla_de_clases(sujetos)
+        for sujeto in sujetos:
+            imgspath_entrenamiento = self.de_entrenamiento
+            imgspath_pruebas = os.listdir(self.url_sujetos + '/' + sujeto)
+            for img in imgspath_pruebas:
+                if (img in imgspath_entrenamiento) == False:
+                    path = self.url_sujetos + '/' + sujeto + '/' + img
+                    id_resultante = self.clasificar(path, "PRUEBAS", False)
+                    sujeto_resultante = self.lista_de_sujetos.get_sujeto_at(id_resultante)
+                    print("SR, ", sujeto_resultante[1], ", S, ", sujeto)
+                    tabla_de_clases = self.agregar_a_tabla(tabla_de_clases, sujeto_resultante[1], sujeto)
+        print(tabla_de_clases)
+        for sujeto in sujetos:
+            precision, recall, fn, fp = self.evaluacion_de_clase(tabla_de_clases, sujeto)
+            writer.writerow(('Sujeto', sujeto))
+            writer.writerow(('Presicion', precision))
+            writer.writerow(('Recall', recall))
+            writer.writerow(('Falsos positivos', fn))
+            writer.writerow(('Falsos negativos', fp))
+        file.close()
+    def armar_tabla_de_clases(self, sujetos):
+        tabla_de_clases = [[0]]
+        for sujeto in sujetos:
+            tabla_de_clases[0] += [sujeto]
+            tabla_de_clases += [[sujeto] + [0] * len(sujetos)]
+        return tabla_de_clases
+    def agregar_a_tabla(self, tabla, sujeto_clasificado, sujeto_verdadero):
+        encontrado = False
+        for fila in range(1, len(tabla)):
+            if (tabla[fila][0] == sujeto_clasificado):
+                for columna in range(1, len(tabla[0])):
+                    if (tabla[0][columna] == sujeto_verdadero):
+                        tabla[fila][columna] += 1
+                        encontrado = True
+                        break
+            if (encontrado == True):
+                break
+        return tabla
+    def evaluacion_de_clase(self, tabla, sujeto):
+        encontrado = False
+        precision = 0
+        recall = 0
+        for fila in range(1, len(tabla)):
+            if (tabla[fila][0] == sujeto):
+                for columna in range(1, len(tabla[0])):
+                    if (tabla[0][columna] == sujeto):
+                        verdaderos_positivos = tabla[fila][columna]
+                        falsos_positivos = self.get_falsos_positivos(tabla, fila, columna)
+                        falsos_negativos = self.get_falsos_negativos(tabla, fila, columna)
+                        encontrado = True
+                        break
+            if (encontrado == True):
+                break
+        if (verdaderos_positivos + falsos_positivos != 0):
+            precision = 100 * verdaderos_positivos / (verdaderos_positivos + falsos_positivos)
+        if (verdaderos_positivos + falsos_negativos != 0):
+            recall = 100 * verdaderos_positivos / (verdaderos_positivos + falsos_negativos)
+        return (precision, recall, falsos_positivos, falsos_negativos)
+    def get_falsos_positivos(self, tabla, fila, columna):
+        falsos_positivos = 0
+        for ccolumna in range(1, len(tabla[0])):
+            if (ccolumna != columna):
+                falsos_positivos += tabla[fila][ccolumna]
+        return falsos_positivos
+    def get_falsos_negativos(self, tabla, fila, columna):
+        falsos_negativos = 0
+        for ffila in range(1, len(tabla)):
+            if (ffila != fila):
+                falsos_negativos += tabla[ffila][columna]
+        return falsos_negativos
