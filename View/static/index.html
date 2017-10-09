@@ -41,12 +41,24 @@
 		  <div class="w3-content">
 		    <div class="w3-twothird" ng-controller="CargaImgsCtrl">
 		      <div>
-		        <h2>Sujetos</h2>
+		      	<h1>Entrenamiento</h1>
+		      	<p>Prefijo para guardar el entrenamiento (el default sera "ent")<input class="input" type="text" ng-model="prefix"></p>
+		      	<p>Porcentaje de auto vectores a conservar:<input type="number" name="quantity1" min="1" max="100" ng-model="energy"></p>
+			  </div>
+		      <div>
 				<p>Ingrese la direccion donde se encuentran los/el sujeto(s), ejm: C:/images, donde la carpeta images contiene subcarpetas con todos los sujetos que se quieran agregar para entrenar.</p>
 				<div>
-				  <p>Direccion: <input class="input" type="text" ng-model="name"><button class="w3-right button" ng-click="send_dir()">Enviar</button></p>
+				  <p>Direccion: <input class="input" type="text" ng-model="name"><button class="w3-right button" ng-click="send_dir()">Entrenar</button></p>
 			  	</div>
 				<p ng-bind="name"></p>
+			  </div>
+			  <div>
+				<h1>Precision del sistema</h1>
+				<p>Porcentaje de las muestras a usar:<input type="number" name="quantity2" min="1" max="100" ng-model="muestras"></p>
+				<div>
+				  <p>Direccion de los sujetos: <input class="input" type="text" ng-model="dir_sujetos"></p>
+				  <button class="w3-right button" ng-click="calculate_presicion()">Calcular</button>
+			  	</div>
 			  </div>
 		    </div>
 		  </div>

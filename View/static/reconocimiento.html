@@ -33,15 +33,22 @@
 
 		<!-- Header -->
 		<header class="w3-container w3-center" style="padding:100px 16px">
-		  <h1 class="w3-margin w3-jumbo">Modulo de reconocimiento</h1>
+		  <h1 class="w3-center w3-jumbo">Modulo de reconocimiento</h1>
 		</header>
 
 		<!-- First Grid -->
 		<div class="w3-row-padding w3-padding-64 w3-container w3-white">
 		  <div class="w3-content">
-		    <div class="w3-twothird" ng-controller="CargaImgsCtrl">
+		    <div class="w3-twothird" ng-controller="ReconocedorCtrl">
 		      <div>
-				<p>Seccion de reconocimiento</p>
+		      	<h1>Reconocimiento</h1>
+		      	<p>Prefijo del entrenamiento a usar (el default sera "ent")<input class="input" type="text" ng-model="prefix_reconocimiento"></p>
+		      </div>
+		      <div>
+				<p>Ingrese la direccion donde se encuentra el sujeto a reconocer, ejm: C:/img.pgm.</p>
+				<div>
+				  <p>Direccion: <input class="input" type="text" ng-model="name_sujeto"><button class="w3-right button" ng-click="send_dir()">Reconocer</button></p>
+			  	</div>
 			  </div>
 		    </div>
 		  </div>

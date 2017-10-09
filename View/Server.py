@@ -27,6 +27,8 @@ def main_index():
 def submit_imgs_dir():
     """# Recibe por POST la direccion local de los sujetos a cargar a la aplicacion"""
     if request.method == 'POST':
+        ent_prefix = request.form['ent_prefix']
+        energy_pct = request.form['energy_pct']
         img_url = request.form['img_url']
         estado = CONTROLADOR.cargar_imagenes(img_url)
         respuesta = jsonify(
@@ -34,7 +36,24 @@ def submit_imgs_dir():
             msg=estado[1]
         )
         if estado[0] == 0:
-            print(CONTROLADOR.entrenar())
+            CONTROLADOR.entrenar(ent_prefix, int(energy_pct)/100)
+            return respuesta
+        return respuesta
+    return APP.send_static_file('index.html')
+@APP.route('/presicion', methods=['GET', 'POST'])
+def get_precision():
+    """# Recibe por POST la direccion local de los sujetos a cargar a la aplicacion"""
+    if request.method == 'POST':
+        num_entrenar = request.form['num_entrenar']
+        energy_pct = request.form['energy_pct']
+        img_url = request.form['img_url']
+        estado = CONTROLADOR.cargar_imagenes(img_url)
+        respuesta = jsonify(
+            status=estado[0],
+            msg=estado[1]
+        )
+        if estado[0] == 0:
+            CONTROLADOR.entrenar(ent_prefix, int(energy_pct)/100)
             return respuesta
         return respuesta
     return APP.send_static_file('index.html')
