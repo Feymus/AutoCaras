@@ -46,7 +46,7 @@ class GestorSujeto(GestorGeneral):
             lista_imagenes += sujeto.get_lista_fotos()
         return lista_imagenes
     def get_sujeto_at(self, id_sujeto):
-        """"Obtiene el sujeto almacenado en lista general al buscarlo por su numero de id
+        """Obtiene el sujeto almacenado en lista general al buscarlo por su numero de id
         Recibe como parametro un numero entero positivo
         @param el id del sujeto
         @return estado de la operacion"""
