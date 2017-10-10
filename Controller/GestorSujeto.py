@@ -12,20 +12,17 @@ from Model.Sujeto import Sujeto
 class GestorSujeto(GestorGeneral):
     '''
     Clase GestorSujeto
-    
     Clase hija del gestor general, encargada de guardar sujetos en memoria"
     '''
     def __init__(self):
         '''
         Constructor de la clase
-    
         El constructor solo llama a su constructor padre
         '''
         GestorGeneral.__init__(self)
     def agregar(self, objeto):
         """
         Metodo Agregar
-        
         Crea un nuevo sujeto y lo agrega a la lista_general de su padre
         @param dict_sujeto diccionario con el nombre y las fotos de un sujeto
         @return el retorno del Agregar de la clase padre
@@ -36,9 +33,7 @@ class GestorSujeto(GestorGeneral):
     def get_all_imgs(self):
         '''
         Metodo get_all_imgs
-        
         Metodo para sacar todas las imagenes de todos los sujetos guardados en memoria
-        
         @return la lista con todas las imagenes
         '''
         lista_imagenes = []
@@ -56,3 +51,4 @@ class GestorSujeto(GestorGeneral):
                 return (0, sujeto.get_nombre())
             contador += 1
         return (-1, "Sujeto no encontrado...")
+    

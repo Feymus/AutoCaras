@@ -10,23 +10,21 @@ Created on Aug 16, 2017
 """
 from __future__ import print_function
 import os
+import csv
 import cv2
 from Controller.GestorSujeto import GestorSujeto
 import numpy as np
-import csv
 class Controlador(object):
     # pylint: disable=too-many-instance-attributes
     #se considera que los 10 atributos son necesarios
     '''
     Clase controlador
-    
     Esta clase es la que permite la comunicacion entre los datos de la aplicacion
     y la interfaz de usuario
     '''
     def __init__(self):
         '''
         Constructor de la clase
-    
         El constructor unicamente inicializa la lista de Sujetos en la aplicacion
         '''
         self.lista_de_sujetos = GestorSujeto()
@@ -43,20 +41,16 @@ class Controlador(object):
     def agregar_sujeto(self, dict_sujeto):
         '''
         Metodo agregar_sujeto
-        
         Segun un diccionario que contiene al sujeto y sus imagenes, guarda al sujeto
-        
         @param dict_sujeto un diccionario con el nombre del sujeto y una lista con sus imagenes
         @return True/False segun si se agrega con exito el sujeto
         '''
         return self.lista_de_sujetos.agregar(dict_sujeto)
     def cargar_imagenes(self, img_url, _num_para_entrenar=6):
-        """ 
+        """
         Metodo cargar_imagenes
-    
         Carga las imagenes de los sujetos encontrados en cierta direccion, carga solo la cantidad
         especificada para entrenar
-    
         @param img_url la direccion local de donde se van a sacar los sujetos y sus imagenes
         @return una tupla con informacion de si se realizo bien o mal
         Ejm de una ruta valida:
@@ -95,16 +89,15 @@ class Controlador(object):
             print (fnf)
             return (-1, "Error: Direccion no encontrada")
         except Exception as excepcion: # pylint: disable-msg=W0703
-            # pylint: disable-msg=C0301
-            print ("El error '{0}' ha ocurrido. Argumentos {1}.".format(excepcion.message, excepcion.args))
+            # pylint: disable-msg=E1101
+            print ("El error '{0}' ha ocurrido. Argumentos {1}.".format(excepcion.message,
+                                                                         excepcion.args))
             return (-1, "Error: Desconocido")
     def entrenar(self, ent_prefix, energy_pct):
         """
         Metodo entrenar
-        
         Genera una base de conocimiento contra la cual se van a comparar
         las imagenes a clasificar
-        
         @param un prefijo de como sera guardada la imagen y la cantidad de autovectores a conservar
         @return un numero que indicar el estado y un mensaje
         """
@@ -116,21 +109,21 @@ class Controlador(object):
             self.auto_valores, self.auto_vectores = self.definir_auto_valores_vectores(self.matriz_de_cov, self.matriz_img_vec, _energia=energy_pct)
             self.pesos = self.definir_pesos(self.matriz_img_vec, self.auto_vectores)
             # pylint: disable-msg=C0301
-            if(ent_prefix != ""):
+            if ent_prefix != "":
                 self.guardar_entrenamiento(ent_prefix)
             else:
                 self.guardar_entrenamiento("ent")
             return (0, "Entrenamiento completado!")
-        except Exception as exception:
-            print ("El error '{0}' ha ocurrido. Argumentos {1}.".format(exception.message, exception.args))
+        except Exception as exception:# pylint: disable-msg=W0703
+            # pylint: disable-msg=E1101
+            print ("El error '{0}' ha ocurrido. Argumentos {1}.".format(exception.message,
+                                                                         exception.args))
             return (-1, "Error: Desconocido")
     # pylint: disable=R0201
     def vectorizar_imagen(self, img):
         """
         Metodo vectorizar_imagen
-        
         Funcion que vectoriza una imagen que le entra por parametro
-        
         @param img recibe la imagen
         @return flat_img devuelve la lista de una imagen vectorizada
         """
@@ -139,9 +132,7 @@ class Controlador(object):
     def definir_matriz_de_imagenes(self, list_imgs):
         """
         Metodo definir_matriz_de_imagenes
-        
         Funcion que crea la matriz con las imagenes vectorizadas
-        
         @param listImgs la lista de la imagen ya vectorizada
         @return MatrizImgVec es la matriz con todas las imagenes vectorizadas de un sujeto
         """
@@ -161,9 +152,7 @@ class Controlador(object):
     def definir_matriz_de_covarianza(self, matriz_img_vec):
         """
         Metodo definir_matriz_de_covarianza
-        
         Genera la matri de covarianza segun la matriz de imagenes y su transpuesta
-        
         @param matriz_img_vec el metodo recibe una matriz de imagenes vectorizadas
         con la que se calculara la matriz de covarianza
         @return matriz_cov se devuelve la matriz de covarianza calculada
@@ -175,11 +164,10 @@ class Controlador(object):
     def definir_auto_valores_vectores(self, matriz_cov, matriz_img_vec, _energia=0.85):
         """
         Metodo definir_auto_valores_vectores
-        
         Recibe como parametros una matriz de covarianza junto a su respectiva matriz
         de imagenes vectorizadas
-        
-        @param matriz de covarianza, matriz de imagenes vectorizadas y cantidad de autovectores a conservar
+        @param matriz de covarianza, matriz de imagenes vectorizadas
+        y cantidad de autovectores a conservar
         @return tupla con autovalores y autovectores
         """
         auto_valores, auto_vectores = np.linalg.eig(matriz_cov)
@@ -204,10 +192,8 @@ class Controlador(object):
     def definir_pesos(self, matriz_img_vec, auto_vectores):
         """
         Metodo definir_pesos
-        
         Determina el peso de los autovectores (imagenes proyectadas). Recibe como parametros
         una matriz con imagenes vectorizdas y una matriz con sus respectivos autovectores
-        
         @param matriz de imagenes vectorizadas, auto vectores
         @return el peso
         """
@@ -215,15 +201,13 @@ class Controlador(object):
     def clasificar(self, img_dir, ent_prefix, cargar_entrenamiento):
         """
         Metodo clasificar
-        
         Recibe como parametros el directorio de la imagen a clasficar, la imagen media
         de las imagenes de entrenamiento, una matriz de autovectores y los pesos de estos
-        
         @param directorio de imagen a clasificar, la imagen media de las imagenes de entrenamiento
         @return id_cercano
         """
         #pylint: disable=maybe-no-member
-        if (cargar_entrenamiento == True):
+        if cargar_entrenamiento is True:
             self.cargar_entrenamiento(ent_prefix)
         img = cv2.imread(img_dir, 0)
         img_col = np.array(img, dtype='float64').flatten()
@@ -237,9 +221,7 @@ class Controlador(object):
     def guardar_entrenamiento(self, ent_prefix):
         '''
         Metodo guardar_entrenamiento
-        
         Guarda el sujeto que se entreno en el sistema
-        
         @param el prefijo que fue escrito
         @return ...
         '''
@@ -252,24 +234,22 @@ class Controlador(object):
     def cargar_entrenamiento(self, ent_prefix):
         """
         Metodo cargar_entrenamiento
-        
         Toma los datos de los archivos .txt y los pone en sus respectivas variables
-        
         @param el prefijo
         @return ...
         """
         nbr_auto_vectores = ent_prefix + "_auto_caras.txt"
-        self.auto_vectores = np.matrix(np.loadtxt('../datos/entrenamientos/' + nbr_auto_vectores, dtype='float64'))
+        self.auto_vectores = np.matrix(np.loadtxt('../datos/entrenamientos/'
+                                                   + nbr_auto_vectores, dtype='float64'))
         nbr_mean = ent_prefix + "_mean.txt"
         self.mean = np.loadtxt('../datos/entrenamientos/' + nbr_mean, dtype='float64')
         nbr_pesos = ent_prefix + "_proyecciones.txt"
         self.pesos = np.matrix(np.loadtxt('../datos/entrenamientos/' + nbr_pesos, dtype='float64'))
+    # pylint: disable=R0914
     def get_precision(self):
-        """ 
+        """
         Metodo get_precision
-        
         Carga un conjunto de muestras prueba midiendo presicion del sistema
-        
         @param null
         @return null
         """
@@ -283,31 +263,37 @@ class Controlador(object):
                 imgspath_entrenamiento = self.de_entrenamiento
                 imgspath_pruebas = os.listdir(self.url_sujetos + '/' + sujeto)
                 for img in imgspath_pruebas:
-                    if (img in imgspath_entrenamiento) == False:
+                    if img in imgspath_entrenamiento == False:
                         path = self.url_sujetos + '/' + sujeto + '/' + img
                         id_resultante = self.clasificar(path, "PRUEBAS", False)
                         sujeto_resultante = self.lista_de_sujetos.get_sujeto_at(id_resultante)
-                        tabla_de_clases = self.agregar_a_tabla(tabla_de_clases, sujeto_resultante[1], sujeto)
+                        tabla_de_clases = self.agregar_a_tabla(tabla_de_clases,
+                                                                sujeto_resultante[1], sujeto)
             for sujeto in sujetos:
-                precision, recall, fn, fp, vp = self.evaluacion_de_clase(tabla_de_clases, sujeto)
+                result = self.evaluacion_de_clase(tabla_de_clases, sujeto)
+                precision = result[0]
+                recall = result[1]
+                falsos_n = result[2]
+                falsos_p = result[3]
+                verdaderos_p = result[4]
                 writer.writerow(('Sujeto', sujeto))
                 writer.writerow(('Precision', precision))
                 writer.writerow(('Recall', recall))
-                writer.writerow(('Falsos positivos', fn))
-                writer.writerow(('Falsos negativos', fp))
-                writer.writerow(('Verdaderos positivos', vp))
+                writer.writerow(('Falsos positivos', falsos_n))
+                writer.writerow(('Falsos negativos', falsos_p))
+                writer.writerow(('Verdaderos positivos', verdaderos_p))
                 writer.writerow((''))
             file.close()
             return (0, "Precision de cada sujeto generada exitosamente!")
-        except Exception as exception:
-            print ("El error '{0}' ha ocurrido. Argumentos {1}.".format(exception.message, exception.args))
+        except Exception as exception: # pylint: disable-msg=W0703
+            # pylint: disable-msg=E1101
+            print ("El error '{0}' ha ocurrido. Argumentos {1}.".format(exception.message,
+                                                                         exception.args))
             return (-1, "Error: Desconocido")
     def armar_tabla_de_clases(self, sujetos):
-        """ 
+        """
         Metodo armar_tabla_de_clases
-        
-        Arma la tabla de clases 
-        
+        Arma la tabla de clases
         @param sujetos
         @return tabla de clases
         """
@@ -316,79 +302,72 @@ class Controlador(object):
             tabla_de_clases[0] += [sujeto]
             tabla_de_clases += [[sujeto] + [0] * len(sujetos)]
         return tabla_de_clases
-    def agregar_a_tabla(self, tabla, sujeto_clasificado, sujeto_verdadero): 
-        """ 
+    def agregar_a_tabla(self, tabla, sujeto_clasificado, sujeto_verdadero):
+        """
         Metodo agregar_a_tabla
-        
         Agrega a la tabla de falsos positivos y negavitos un nuevo valor
-        
         @param sujeto clasificado y sujeto verdadero
         @return la tabla
         """
         encontrado = False
         for fila in range(1, len(tabla)):
-            if (tabla[fila][0] == sujeto_clasificado):
+            if tabla[fila][0] == sujeto_clasificado:
                 for columna in range(1, len(tabla[0])):
-                    if (tabla[0][columna] == sujeto_verdadero):
+                    if tabla[0][columna] == sujeto_verdadero:
                         tabla[fila][columna] += 1
                         encontrado = True
                         break
-            if (encontrado == True):
+            if encontrado is True:
                 break
         return tabla
-    def evaluacion_de_clase(self, tabla, sujeto): 
-        """ 
+    def evaluacion_de_clase(self, tabla, sujeto):
+        """
         Metodo evaluacion_de_clase
-        
-        Evalua la tabla respecto a los sujetos  
-        
-        @param la tabla y los sujetos 
-        @return el resultado de la tabla  
+        Evalua la tabla respecto a los sujetos
+        @param la tabla y los sujetos
+        @return el resultado de la tabla
         """
         encontrado = False
         precision = 0
         recall = 0
         for fila in range(1, len(tabla)):
-            if (tabla[fila][0] == sujeto):
+            if tabla[fila][0] == sujeto:
                 for columna in range(1, len(tabla[0])):
-                    if (tabla[0][columna] == sujeto):
+                    if tabla[0][columna] == sujeto:
                         verdaderos_positivos = tabla[fila][columna]
                         falsos_positivos = self.get_falsos_positivos(tabla, fila, columna)
                         falsos_negativos = self.get_falsos_negativos(tabla, fila, columna)
                         encontrado = True
                         break
-            if (encontrado == True):
+            if encontrado is True:
                 break
-        if (verdaderos_positivos + falsos_positivos != 0):
+        if verdaderos_positivos + falsos_positivos != 0:
             precision = 100 * verdaderos_positivos / (verdaderos_positivos + falsos_positivos)
-        if (verdaderos_positivos + falsos_negativos != 0):
+        if verdaderos_positivos + falsos_negativos != 0:
             recall = 100 * verdaderos_positivos / (verdaderos_positivos + falsos_negativos)
         return (precision, recall, falsos_positivos, falsos_negativos, verdaderos_positivos)
     def get_falsos_positivos(self, tabla, fila, columna):
         """
         Metodo get_falsos_positivos
-        
         Obtiene los falsos positivos
-        
         @param la tabla, el numero de la fila y columna
-        @return los falsos positivos  
+        @return los falsos positivos
         """
         falsos_positivos = 0
         for ccolumna in range(1, len(tabla[0])):
-            if (ccolumna != columna):
+            if ccolumna != columna:
                 falsos_positivos += tabla[fila][ccolumna]
         return falsos_positivos
-    def get_falsos_negativos(self, tabla, fila, columna): 
-        """ 
+    def get_falsos_negativos(self, tabla, fila, columna):
+        """
         Metodo get_falsos_negativos
-        
         Obtiene los falsos negativos
-        
         @param tabla, el numero de la fila y columna
         @return  falsos negativos
         """
         falsos_negativos = 0
         for ffila in range(1, len(tabla)):
-            if (ffila != fila):
+            if ffila != fila:
                 falsos_negativos += tabla[ffila][columna]
         return falsos_negativos
+    

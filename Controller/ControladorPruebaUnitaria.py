@@ -13,26 +13,22 @@ import numpy as np
 class ControladorTest(unittest.TestCase):
     '''
     Clase ControladorTest
-    
     Clase para el control de pruebas unitarias
     '''
     def setUp(self):
         """
         Esta clase controla lo que tiene que ver con pruebas unitarias de la clase Controlador
         Metodo setUp
-    
         El metodo setUp inicializa todo lo necesario para realizar las pruebas
         """
         self.tester = Controlador()
     def test_cargar_imagenes(self):
         """
         Metodo test_cargar_imagenes
-        
         Prueba del metodo cargar_imagenes en la clase Controlador,
         la prueba se realiza asegurando que se consigan todas las imagenes de los sujetos
         que esten en la direccion dada y confirmando que la lista de sujetos no este vacia y
         que existan imagenes (esto ultimo puede no darse)
-        
         @param url de la carpeta donde se encuentran los sujetos y sus imagenes
         @return Fail si no se cargan las imagenes o los sujetos
         @return Ok si todo cargo correctamente
@@ -46,14 +42,12 @@ class ControladorTest(unittest.TestCase):
     def test_vectorizar_imagen(self):
         """
         Metodo test_vectorizar_imagen
-        
         Prueba del metodo vectorizar_imagen en la clase Controlador, la prueba
         se realiza asegurando que la imagen se haya aplanado a 1 dimension
         y confirmando el tamano final de la imagen
-        
         @param matrix con listas simulando una imagen
         @return Fail si no se aplano la imagen o si no tiene el tamao adecuado
-        @return Ok en caso contrario 
+        @return Ok en caso contrario
         """
         result = self.tester.vectorizar_imagen([[1, 2], [3, 4]])
         lista_resultado = np.array([1, 2, 3, 4], dtype='float64')
@@ -62,88 +56,78 @@ class ControladorTest(unittest.TestCase):
     def test_matriz_de_imagenes(self):
         """
         Metodo test_matriz_de_imagenes
-        
         Prueba del metodo definir_matriz_de_imagenes en la case Controlador,
         la prueba se realiza asegurando el resultado de la matriz
         segun una lista de "imagenes"
-        
-        @param matrix con listas de "imagenes" 
+        @param matrix con listas de "imagenes"
         @return Fail si no se consiguio la matriz de imagenes vectorizadas o si el mean
         es incorrecto
-        @return Ok en caso contrario 
+        @return Ok en caso contrario
         """
         imagenes = [[[1, 3]], [[20, 40]]]
         result, mean = self.tester.definir_matriz_de_imagenes(imagenes)
-        self.assertEquals(result.tolist(), [[-9.5, 9.5], [-18.5, 18.5]])
-        self.assertEquals(mean.tolist(), [10.5, 21.5])
+        self.assertEqual(result.tolist(), [[-9.5, 9.5], [-18.5, 18.5]])
+        self.assertEqual(mean.tolist(), [10.5, 21.5])
     def test_matriz_de_covarianza(self):
         """
         Metodo test_matriz_de_covarianza
-        
         Prueba del metodo definir_matriz_de_covarianza en la case Controlador,
         la prueba se realiza asegurando el resultado de la matriz
         segun la cantidad de "imagenes"
-        
         @param matrix de "imagenes" vectorizadas
         @return Fail si no es la matriz de covarianza correcta o si tiene el tamano incorrecto
-        @return Ok en caso contrario 
+        @return Ok en caso contrario
         """
         result = self.tester.definir_matriz_de_covarianza(np.matrix([[-9.5, 9.5], [-18.5, 18.5]]))
-        self.assertEquals(result.tolist(), [[432.5, -432.5], [-432.5, 432.5]])
-        self.assertEquals(len(result), 2)
+        self.assertEqual(result.tolist(), [[432.5, -432.5], [-432.5, 432.5]])
+        self.assertEqual(len(result), 2)
     def test_auto_valores_vectores(self):
         """
         Metodo test_auto_valores_vectores
-        
         Prueba del metodo definir_auto_valores_vectores en la case Controlador,
         la prueba se realiza asegurando que los autovalores y autovectores
         sean los correctos dada una matriz de imagenes vectorizadas y su respectiva
         matriz de covarianza
-        
         @param matrix de covarianza
         @param matrix de "imagenes" vectorizadas
         @return Fail si los auto valores son incorrectos o si los autovectores son incorrectos
-        @return Ok en caso contrario 
+        @return Ok en caso contrario
         """
         matriz_cov = np.matrix([[432.5, -432.5], [-432.5, 432.5]])
         matriz_img = np.matrix([[-9.5, 9.5], [-18.5, 18.5]])
         # pylint: disable-msg=C0301
         result_auto_valores, result_auto_vectores = self.tester.definir_auto_valores_vectores(matriz_cov, matriz_img)
-        self.assertEquals(result_auto_valores.tolist(), [865.0])
+        self.assertEqual(result_auto_valores.tolist(), [865.0])
         # pylint: disable-msg=C0301
-        self.assertEquals(result_auto_vectores.tolist(), [[-0.4472135954999579], [-0.8944271909999159]])
+        self.assertEqual(result_auto_vectores.tolist(), [[-0.4472135954999579], [-0.8944271909999159]])
 
     def test_pesos(self):
         """
         Metodo test_pesos
-        
         Prueba del metodo definir_pesos en la case Controlador,
         la prueba se realiza asegurando que los pesos
         sean los correctos dada una matriz de imagenes vectorizadas y sus respectivos
         autovectores
-        
-        @param auto_vectores 
+        @param auto_vectores
         @param matrix de "imagenes" vectorizadas
         @return Fail si los pesos (imagenes proyectadas) son incorrectas
-        @return Ok en caso contrario 
+        @return Ok en caso contrario
         """
         matriz_img = np.matrix([[-9.5, 9.5], [-18.5, 18.5]])
         auto_vectores = np.matrix([[-0.4472135954999579], [-0.8944271909999159]])
         result = self.tester.definir_pesos(matriz_img, auto_vectores)
-        self.assertEquals(result.tolist(), [[20.79543219074804, -20.79543219074804]])
+        self.assertEqual(result.tolist(), [[20.79543219074804, -20.79543219074804]])
     def test_clasificar(self):
         """
         Metodo test_clasificar
-        
         Prueba del metodo clasificar en la case Controlador,
         la prueba se realiza asegurando que la clasificacion
         sea la correcta dada una imagen cuya clasificion es conocida
         autovectores
-        
         @param url de las iamgenes a entrenar
         @param url de la imagen a reconocer
         @return Fail si reconoce incorrectamente al sujeto
-        @return Ok en caso contrario 
+        @return Ok en caso contrario
         """
         self.tester.cargar_imagenes("../Images/")
         self.tester.entrenar("prueba_unitaria1", 0.85)
@@ -154,15 +138,13 @@ class ControladorTest(unittest.TestCase):
     def test_carga_de_entrenamiento(self):
         """
         Metodo test_carga_de_entrenamiento
-        
         Prueba del metodo cargar_entrenamiento en la case Controlador,
         la prueba se realiza asegurando que el entrenamiento
         se cargue correctamente luego de haberlo guardado
-        
         @param prefijo del entrenamiento a guardar y cargar
         @return Fail si los auto vectores e imagenes proyectadas no son
         iguales despues y antes de guardar
-        @return Ok en caso contrario 
+        @return Ok en caso contrario
         """
         self.tester.cargar_imagenes("../Images/")
         self.tester.entrenar("prueba_unitaria2", 0.85)
@@ -177,3 +159,4 @@ class ControladorTest(unittest.TestCase):
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
+    
