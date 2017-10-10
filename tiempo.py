@@ -1,3 +1,5 @@
+import time
+
 def measure_time(f):
     def timed(*args, **kw):
         ts = time.time()
