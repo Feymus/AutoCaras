@@ -1,205 +1,287 @@
-Sujeto,s1
-Presicion,100.0
-Recall,50.0
-Falsos positivos,0
-Falsos negativos,1
-Sujeto,s10
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s11
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s12
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s13
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s14
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s15
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s16
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s17
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s18
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s19
-Presicion,100.0
-Recall,50.0
-Falsos positivos,0
-Falsos negativos,1
-Sujeto,s2
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s20
-Presicion,100.0
-Recall,50.0
-Falsos positivos,0
-Falsos negativos,1
-Sujeto,s21
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s22
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s23
-Presicion,66.66666666666667
-Recall,100.0
-Falsos positivos,1
-Falsos negativos,0
-Sujeto,s24
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s25
-Presicion,66.66666666666667
-Recall,100.0
-Falsos positivos,1
-Falsos negativos,0
-Sujeto,s26
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s27
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s28
-Presicion,100.0
-Recall,50.0
-Falsos positivos,0
-Falsos negativos,1
-Sujeto,s29
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s3
-Presicion,66.66666666666667
-Recall,100.0
-Falsos positivos,1
-Falsos negativos,0
-Sujeto,s30
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s31
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s32
-Presicion,66.66666666666667
-Recall,100.0
-Falsos positivos,1
-Falsos negativos,0
-Sujeto,s33
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s34
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s35
-Presicion,100.0
-Recall,50.0
-Falsos positivos,0
-Falsos negativos,1
-Sujeto,s36
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s37
-Presicion,66.66666666666667
-Recall,100.0
-Falsos positivos,1
-Falsos negativos,0
-Sujeto,s38
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s39
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s4
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s40
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s41
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s5
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s6
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s7
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s8
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
-Sujeto,s9
-Presicion,100.0
-Recall,100.0
-Falsos positivos,0
-Falsos negativos,0
+Sujeto,s1
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s10
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s11
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s12
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s13
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s14
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s15
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s16
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s17
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s18
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s19
+Precision,100.0
+Recall,50.0
+Falsos positivos,0
+Falsos negativos,1
+Verdaderos positivos,1
+
+Sujeto,s2
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s20
+Precision,100.0
+Recall,50.0
+Falsos positivos,0
+Falsos negativos,1
+Verdaderos positivos,1
+
+Sujeto,s21
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s22
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s23
+Precision,66.66666666666667
+Recall,100.0
+Falsos positivos,1
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s24
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s25
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s26
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s27
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s28
+Precision,100.0
+Recall,50.0
+Falsos positivos,0
+Falsos negativos,1
+Verdaderos positivos,1
+
+Sujeto,s29
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s3
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s30
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s31
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s32
+Precision,66.66666666666667
+Recall,100.0
+Falsos positivos,1
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s33
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s34
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s35
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s36
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s37
+Precision,66.66666666666667
+Recall,100.0
+Falsos positivos,1
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s38
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s39
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s4
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s40
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s41
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s5
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s6
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s7
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s8
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+
+Sujeto,s9
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
+Verdaderos positivos,2
+

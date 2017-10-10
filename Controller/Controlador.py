@@ -1,28 +1,34 @@
-"""Esta clase gestiona la interaccion entre la pagina web y el modelo
-Gestiona el proceso de entrenamiento y clasificacion de sujetos"""
-#Created on Aug 16, 2017
-#
-#@author: Michael Choque
-#@author: Nelson Gomez
-#@author: William Espinoza
+"""
+Esta clase gestiona la interaccion entre la pagina web y el modelo
+Gestiona el proceso de entrenamiento y clasificacion de sujetos
+
+Created on Aug 16, 2017
+
+@author: Michael Choque
+@author: Nelson Gomez
+@author: William Espinoza
+"""
 from __future__ import print_function
 import os
 import cv2
 from Controller.GestorSujeto import GestorSujeto
 import numpy as np
 import csv
-
-
 class Controlador(object):
     # pylint: disable=too-many-instance-attributes
     #se considera que los 10 atributos son necesarios
-    """ Clase controlador
+    '''
+    Clase controlador
     
     Esta clase es la que permite la comunicacion entre los datos de la aplicacion
-    y la interfaz de usuario"""
+    y la interfaz de usuario
+    '''
     def __init__(self):
-        '''Constructor de la clase
-        El constructor unicamente inicializa la lista de Sujetos en la aplicacion'''
+        '''
+        Constructor de la clase
+    
+        El constructor unicamente inicializa la lista de Sujetos en la aplicacion
+        '''
         self.lista_de_sujetos = GestorSujeto()
         self.num_para_entrenar = None
         self.mean = None
@@ -35,17 +41,27 @@ class Controlador(object):
         self.num_sujetos = None
         self.url_sujetos = None
     def agregar_sujeto(self, dict_sujeto):
-        """ Metodo agregar_sujeto
+        '''
+        Metodo agregar_sujeto
+        
+        Segun un diccionario que contiene al sujeto y sus imagenes, guarda al sujeto
+        
         @param dict_sujeto un diccionario con el nombre del sujeto y una lista con sus imagenes
-        @return True/False segun si se agrega con exito el sujeto"""
+        @return True/False segun si se agrega con exito el sujeto
+        '''
         return self.lista_de_sujetos.agregar(dict_sujeto)
     def cargar_imagenes(self, img_url, _num_para_entrenar=6):
-        """ Metodo cargar_imagenes
+        """ 
+        Metodo cargar_imagenes
+    
+        Carga las imagenes de los sujetos encontrados en cierta direccion, carga solo la cantidad
+        especificada para entrenar
     
         @param img_url la direccion local de donde se van a sacar los sujetos y sus imagenes
         @return una tupla con informacion de si se realizo bien o mal
         Ejm de una ruta valida:
-        C:/Users/HP/Desktop/TEC/II Semestre 2017/Aseguramiento de calidad/Proyecto/AutoCaras/Images"""
+        C:/Users/HP/Desktop/TEC/II Semestre 2017/Aseguramiento de calidad/Proyecto/AutoCaras/Images
+        """
         self.lista_de_sujetos = GestorSujeto()
         self.num_para_entrenar = _num_para_entrenar
         self.url_sujetos = img_url
@@ -83,11 +99,15 @@ class Controlador(object):
             print ("El error '{0}' ha ocurrido. Argumentos {1}.".format(excepcion.message, excepcion.args))
             return (-1, "Error: Desconocido")
     def entrenar(self, ent_prefix, energy_pct):
-        """Genera una base de conocimiento contra la cual se van a comparar
-        las imagenes a clasificar
-        @param un prefijo de como será guardada la imagen y la cantidad de autovectores a conservar
-        @return un numero que indicar el estado y un mensaje"""
+        """
+        Metodo entrenar
         
+        Genera una base de conocimiento contra la cual se van a comparar
+        las imagenes a clasificar
+        
+        @param un prefijo de como sera guardada la imagen y la cantidad de autovectores a conservar
+        @return un numero que indicar el estado y un mensaje
+        """
         try:
             imgs = self.lista_de_sujetos.get_all_imgs()
             self.matriz_img_vec, self.mean = self.definir_matriz_de_imagenes(imgs)
@@ -106,15 +126,25 @@ class Controlador(object):
             return (-1, "Error: Desconocido")
     # pylint: disable=R0201
     def vectorizar_imagen(self, img):
-        """Funcion que vectoriza una imagen que le entra por parametro
+        """
+        Metodo vectorizar_imagen
+        
+        Funcion que vectoriza una imagen que le entra por parametro
+        
         @param img recibe la imagen
-        @return flat_img devuelve la lista de una imagen vectorizada."""
+        @return flat_img devuelve la lista de una imagen vectorizada
+        """
         flat_img = np.array(img, dtype='float64').flatten() # Vectorizacion de una matriz
         return flat_img
     def definir_matriz_de_imagenes(self, list_imgs):
-        """Funcion que crea la matriz con las imagenes vectorizadas
+        """
+        Metodo definir_matriz_de_imagenes
+        
+        Funcion que crea la matriz con las imagenes vectorizadas
+        
         @param listImgs la lista de la imagen ya vectorizada
-        @return MatrizImgVec es la matriz con todas las imagenes vectorizadas de un sujeto"""
+        @return MatrizImgVec es la matriz con todas las imagenes vectorizadas de un sujeto
+        """
         total = len(list_imgs[0]) * len(list_imgs[0][0])
         numero_imagenes = len(list_imgs) #numero de imagenes a recorrer
         matriz_img_vec = np.empty(shape=(total, numero_imagenes), dtype='float64')
@@ -129,20 +159,29 @@ class Controlador(object):
             matriz_img_vec[:, j] -= mean_img[:]
         return (matriz_img_vec, mean_img)
     def definir_matriz_de_covarianza(self, matriz_img_vec):
-        """Metodo definir_matriz_de_covarianza
+        """
+        Metodo definir_matriz_de_covarianza
+        
+        Genera la matri de covarianza segun la matriz de imagenes y su transpuesta
         
         @param matriz_img_vec el metodo recibe una matriz de imagenes vectorizadas
         con la que se calculara la matriz de covarianza
-        @return matriz_cov se devuelve la matriz de covarianza calculada """
+        @return matriz_cov se devuelve la matriz de covarianza calculada
+        """
         #pylint: disable=maybe-no-member
         matriz_cov = np.matrix(matriz_img_vec.transpose()) * np.matrix(matriz_img_vec)
         np.divide(matriz_cov, len(matriz_img_vec[0]), out=matriz_cov, casting='unsafe')
         return matriz_cov
     def definir_auto_valores_vectores(self, matriz_cov, matriz_img_vec, _energia=0.85):
-        """Recibe como parametros una matriz de covarianza junto a su respectiva matriz
+        """
+        Metodo definir_auto_valores_vectores
+        
+        Recibe como parametros una matriz de covarianza junto a su respectiva matriz
         de imagenes vectorizadas
+        
         @param matriz de covarianza, matriz de imagenes vectorizadas y cantidad de autovectores a conservar
-        @return tupla con autovalores y autovectores"""
+        @return tupla con autovalores y autovectores
+        """
         auto_valores, auto_vectores = np.linalg.eig(matriz_cov)
         indices = auto_valores.argsort()[::-1]
         auto_valores = auto_valores[indices]
@@ -163,16 +202,26 @@ class Controlador(object):
         auto_vectores = auto_vectores / norms
         return (auto_valores, auto_vectores)
     def definir_pesos(self, matriz_img_vec, auto_vectores):
-        """Determina el peso de los autovectores. Recibe como parametros
+        """
+        Metodo definir_pesos
+        
+        Determina el peso de los autovectores (imagenes proyectadas). Recibe como parametros
         una matriz con imagenes vectorizdas y una matriz con sus respectivos autovectores
+        
         @param matriz de imagenes vectorizadas, auto vectores
-        @return el peso"""
+        @return el peso
+        """
         return auto_vectores.transpose() * matriz_img_vec
     def clasificar(self, img_dir, ent_prefix, cargar_entrenamiento):
-        """Recibe como parametros el directorio de la imagen a clasficar, la imagen media
+        """
+        Metodo clasificar
+        
+        Recibe como parametros el directorio de la imagen a clasficar, la imagen media
         de las imagenes de entrenamiento, una matriz de autovectores y los pesos de estos
+        
         @param directorio de imagen a clasificar, la imagen media de las imagenes de entrenamiento
-        @return id_cercano"""
+        @return id_cercano
+        """
         #pylint: disable=maybe-no-member
         if (cargar_entrenamiento == True):
             self.cargar_entrenamiento(ent_prefix)
@@ -187,9 +236,13 @@ class Controlador(object):
         return (id_cercano // self.num_para_entrenar) + 1
     def guardar_entrenamiento(self, ent_prefix):
         '''
+        Metodo guardar_entrenamiento
+        
         Guarda el sujeto que se entreno en el sistema
+        
         @param el prefijo que fue escrito
-        @return ...'''
+        @return ...
+        '''
         nbr_auto_vectores = ent_prefix + "_auto_caras.txt"
         np.savetxt('../datos/entrenamientos/' + nbr_auto_vectores, self.auto_vectores)
         nbr_mean = ent_prefix + "_mean.txt"
@@ -198,53 +251,80 @@ class Controlador(object):
         np.savetxt('../datos/entrenamientos/' + nbr_pesos, self.pesos)
     def cargar_entrenamiento(self, ent_prefix):
         """
+        Metodo cargar_entrenamiento
+        
         Toma los datos de los archivos .txt y los pone en sus respectivas variables
+        
         @param el prefijo
-        @return ...   """
+        @return ...
+        """
         nbr_auto_vectores = ent_prefix + "_auto_caras.txt"
         self.auto_vectores = np.matrix(np.loadtxt('../datos/entrenamientos/' + nbr_auto_vectores, dtype='float64'))
         nbr_mean = ent_prefix + "_mean.txt"
         self.mean = np.loadtxt('../datos/entrenamientos/' + nbr_mean, dtype='float64')
         nbr_pesos = ent_prefix + "_proyecciones.txt"
         self.pesos = np.matrix(np.loadtxt('../datos/entrenamientos/' + nbr_pesos, dtype='float64'))
-    def get_precision(self):""" Carga un conjunto de muestras prueba midiendo presicion del sistema
+    def get_precision(self):
+        """ 
+        Metodo get_precision
+        
+        Carga un conjunto de muestras prueba midiendo presicion del sistema
+        
         @param null
-        @return null""""
-        file = open("../datos/pruebas/precision.csv", 'wt')
-        writer = csv.writer(file)
-        sujetos = [sujeto for sujeto in os.listdir(self.url_sujetos)
-                       if os.path.isdir(os.path.join(self.url_sujetos, sujeto))]
-        tabla_de_clases = self.armar_tabla_de_clases(sujetos)
-        for sujeto in sujetos:
-            imgspath_entrenamiento = self.de_entrenamiento
-            imgspath_pruebas = os.listdir(self.url_sujetos + '/' + sujeto)
-            for img in imgspath_pruebas:
-                if (img in imgspath_entrenamiento) == False:
-                    path = self.url_sujetos + '/' + sujeto + '/' + img
-                    id_resultante = self.clasificar(path, "PRUEBAS", False)
-                    sujeto_resultante = self.lista_de_sujetos.get_sujeto_at(id_resultante)
-                    print("SR, ", sujeto_resultante[1], ", S, ", sujeto)
-                    tabla_de_clases = self.agregar_a_tabla(tabla_de_clases, sujeto_resultante[1], sujeto)
-        print(tabla_de_clases)
-        for sujeto in sujetos:
-            precision, recall, fn, fp = self.evaluacion_de_clase(tabla_de_clases, sujeto)
-            writer.writerow(('Sujeto', sujeto))
-            writer.writerow(('Presicion', precision))
-            writer.writerow(('Recall', recall))
-            writer.writerow(('Falsos positivos', fn))
-            writer.writerow(('Falsos negativos', fp))
-        file.close()
-    def armar_tabla_de_clases(self, sujetos): """ Armar la tabla de clases 
+        @return null
+        """
+        try:
+            file = open("../datos/pruebas/precision.csv", 'wt')
+            writer = csv.writer(file, lineterminator='\n')
+            sujetos = [sujeto for sujeto in os.listdir(self.url_sujetos)
+                           if os.path.isdir(os.path.join(self.url_sujetos, sujeto))]
+            tabla_de_clases = self.armar_tabla_de_clases(sujetos)
+            for sujeto in sujetos:
+                imgspath_entrenamiento = self.de_entrenamiento
+                imgspath_pruebas = os.listdir(self.url_sujetos + '/' + sujeto)
+                for img in imgspath_pruebas:
+                    if (img in imgspath_entrenamiento) == False:
+                        path = self.url_sujetos + '/' + sujeto + '/' + img
+                        id_resultante = self.clasificar(path, "PRUEBAS", False)
+                        sujeto_resultante = self.lista_de_sujetos.get_sujeto_at(id_resultante)
+                        tabla_de_clases = self.agregar_a_tabla(tabla_de_clases, sujeto_resultante[1], sujeto)
+            for sujeto in sujetos:
+                precision, recall, fn, fp, vp = self.evaluacion_de_clase(tabla_de_clases, sujeto)
+                writer.writerow(('Sujeto', sujeto))
+                writer.writerow(('Precision', precision))
+                writer.writerow(('Recall', recall))
+                writer.writerow(('Falsos positivos', fn))
+                writer.writerow(('Falsos negativos', fp))
+                writer.writerow(('Verdaderos positivos', vp))
+                writer.writerow((''))
+            file.close()
+            return (0, "Precision de cada sujeto generada exitosamente!")
+        except Exception as exception:
+            print ("El error '{0}' ha ocurrido. Argumentos {1}.".format(exception.message, exception.args))
+            return (-1, "Error: Desconocido")
+    def armar_tabla_de_clases(self, sujetos):
+        """ 
+        Metodo armar_tabla_de_clases
+        
+        Arma la tabla de clases 
+        
         @param sujetos
-        @return tabla de clases"""
+        @return tabla de clases
+        """
         tabla_de_clases = [[0]]
         for sujeto in sujetos:
             tabla_de_clases[0] += [sujeto]
             tabla_de_clases += [[sujeto] + [0] * len(sujetos)]
         return tabla_de_clases
-    def agregar_a_tabla(self, tabla, sujeto_clasificado, sujeto_verdadero): """ Agrega a la tabla de falsos positivos y negavitos
+    def agregar_a_tabla(self, tabla, sujeto_clasificado, sujeto_verdadero): 
+        """ 
+        Metodo agregar_a_tabla
+        
+        Agrega a la tabla de falsos positivos y negavitos un nuevo valor
+        
         @param sujeto clasificado y sujeto verdadero
-        @return la tabla"""
+        @return la tabla
+        """
         encontrado = False
         for fila in range(1, len(tabla)):
             if (tabla[fila][0] == sujeto_clasificado):
@@ -256,7 +336,12 @@ class Controlador(object):
             if (encontrado == True):
                 break
         return tabla
-    def evaluacion_de_clase(self, tabla, sujeto): """ evalua la tabla respecto a los sujetos  
+    def evaluacion_de_clase(self, tabla, sujeto): 
+        """ 
+        Metodo evaluacion_de_clase
+        
+        Evalua la tabla respecto a los sujetos  
+        
         @param la tabla y los sujetos 
         @return el resultado de la tabla  
         """
@@ -278,18 +363,30 @@ class Controlador(object):
             precision = 100 * verdaderos_positivos / (verdaderos_positivos + falsos_positivos)
         if (verdaderos_positivos + falsos_negativos != 0):
             recall = 100 * verdaderos_positivos / (verdaderos_positivos + falsos_negativos)
-        return (precision, recall, falsos_positivos, falsos_negativos)
-    def get_falsos_positivos(self, tabla, fila, columna): """Obtiene los falsos positivos
+        return (precision, recall, falsos_positivos, falsos_negativos, verdaderos_positivos)
+    def get_falsos_positivos(self, tabla, fila, columna):
+        """
+        Metodo get_falsos_positivos
+        
+        Obtiene los falsos positivos
+        
         @param la tabla, el numero de la fila y columna
-        @return los falsos positivos  """
+        @return los falsos positivos  
+        """
         falsos_positivos = 0
         for ccolumna in range(1, len(tabla[0])):
             if (ccolumna != columna):
                 falsos_positivos += tabla[fila][ccolumna]
         return falsos_positivos
-    def get_falsos_negativos(self, tabla, fila, columna): """ Obtiene los falsos negativos
+    def get_falsos_negativos(self, tabla, fila, columna): 
+        """ 
+        Metodo get_falsos_negativos
+        
+        Obtiene los falsos negativos
+        
         @param tabla, el numero de la fila y columna
-        @return  falsos negativos"""
+        @return  falsos negativos
+        """
         falsos_negativos = 0
         for ffila in range(1, len(tabla)):
             if (ffila != fila):

@@ -1,31 +1,64 @@
-#Created on Oct 8, 2017
-#
-#@author: Michael Choque
-#@author: Nelson Gomez
-#@author: William Espinoza
-from Controller.Controlador import Controlador
+'''
+Created on Oct 8, 2017
 
+@author: Michael Choque
+@author: Nelson Gomez
+@author: William Espinoza
+'''
+from Controller.Controlador import Controlador
 class Facade(object):
     '''
-    classdocs
+    Clase Facade
+    
+    Esta clase permite separar la dependencia hacia el controlador
     '''
-
-
-    def __init__(self, params):
-        self.controlador = Controlador()
+    def __init__(self):
+        '''
+        Constructor de la clase
         
-    
-    def entrenar(self, img_url, _num_para_entrenar=6): 
-        """funcion de entrenar sujeto 
-        @param recibe el url, y el numero de imagenes que se usan para el entrenamiento
-        @estado y mensaje """
-        result = self.controlador.cargar_imagenes(img_url, _num_para_entrenar)
-        if(result[0] != 0):
-            return result
-        entrenamiento_result = self.controlador.entrenar()
-        if(entrenamiento_result[0] != 0):
-            return entrenamiento_result
-        return result
-    
-    def clasificar(self):
-        pass
+        El constructor inicializa el controlador de la clase
+        '''
+        self.controlador = Controlador()
+    def cargar_imagenes(self, img_url, _num_para_entrenar=6):
+        '''
+        Metodo cargar_imagenes
+        
+        Carga las imagenes para el entrenamiento
+        
+        @param img_url la direccion local de donde se van a sacar los sujetos y sus imagenes
+        @return una tupla con informacion de si se realizo bien o mal
+        '''
+        return self.controlador.cargar_imagenes(img_url, _num_para_entrenar=_num_para_entrenar)
+    def entrenar(self, ent_prefix, energy_pct):
+        '''
+        Metodo entrenar
+        
+        Genera una base de conocimiento contra la cual se van a comparar
+        las imagenes a clasificar
+        
+        @param un prefijo de como sera guardada la imagen y la cantidad de autovectores a conservar
+        @return un numero que indica el estado y un mensaje
+        '''
+        return self.controlador.entrenar(ent_prefix, energy_pct)
+    def clasificar(self, img_dir, ent_prefix, cargar_entrenamiento):
+        '''
+        Metodo clasificar
+        
+        Recibe como parametros el directorio de la imagen a clasficar, la imagen media
+        de las imagenes de entrenamiento, una matriz de autovectores y los pesos de estos
+        
+        @param directorio de imagen a clasificar, la imagen media de las imagenes de entrenamiento
+        @return id_cercano
+        '''
+        sujeto_id = self.controlador.clasificar(img_dir, ent_prefix, cargar_entrenamiento)
+        return self.controlador.lista_de_sujetos.get_sujeto_at(sujeto_id)
+    def get_precision(self):
+        """ 
+        Metodo get_precision
+        
+        Carga un conjunto de muestras prueba midiendo presicion del sistema
+        
+        @param null
+        @return null
+        """
+        return self.controlador.get_precision()
