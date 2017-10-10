@@ -43,7 +43,7 @@ def submit_imgs_dir():
         )
         if estado[0] == 0:
             CONTROLADOROP.entrenar(ent_prefix, int(energy_pct)/100)
-            #sujeto = CONTROLADORUC.clasificar("../Images/s23/8.pgm", ent_prefix, False)
+            #sujeto = CONTROLADORUC.clasificar("../Images/s41/8.pgm", ent_prefix, False)
             #print("Sujeto: ", sujeto)
             return respuesta
         return respuesta
@@ -55,7 +55,7 @@ def get_precision():
         num_entrenar = request.form['num_entrenar']
         img_url = request.form['img_url']
         num_entrenar = 10 - (int(num_entrenar)//10)
-        estado = CONTROLADOROP.cargar_imagenes(img_url, _num_para_entrenar=num_entrenar)
+        estado = CONTROLADOROP.cargar_imagenes(img_url, num_entrenar)
         if estado[0] == 0:
             CONTROLADOROP.entrenar("PRUEBAS", 0.85)
             estado = CONTROLADOROP.get_precision()

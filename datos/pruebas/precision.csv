@@ -1,16 +1,16 @@
 Sujeto,s1
 Precision,100.0
-Recall,100.0
+Recall,50.0
 Falsos positivos,0
-Falsos negativos,0
-Verdaderos positivos,2
+Falsos negativos,1
+Verdaderos positivos,1
 
 Sujeto,s10
 Precision,100.0
-Recall,100.0
+Recall,50.0
 Falsos positivos,0
-Falsos negativos,0
-Verdaderos positivos,2
+Falsos negativos,1
+Verdaderos positivos,1
 
 Sujeto,s11
 Precision,100.0
@@ -84,10 +84,10 @@ Verdaderos positivos,2
 
 Sujeto,s20
 Precision,100.0
-Recall,50.0
+Recall,100.0
 Falsos positivos,0
-Falsos negativos,1
-Verdaderos positivos,1
+Falsos negativos,0
+Verdaderos positivos,2
 
 Sujeto,s21
 Precision,100.0
@@ -104,11 +104,11 @@ Falsos negativos,0
 Verdaderos positivos,2
 
 Sujeto,s23
-Precision,66.66666666666667
-Recall,100.0
-Falsos positivos,1
-Falsos negativos,0
-Verdaderos positivos,2
+Precision,100.0
+Recall,50.0
+Falsos positivos,0
+Falsos negativos,1
+Verdaderos positivos,1
 
 Sujeto,s24
 Precision,100.0
@@ -118,9 +118,9 @@ Falsos negativos,0
 Verdaderos positivos,2
 
 Sujeto,s25
-Precision,100.0
+Precision,66.66666666666667
 Recall,100.0
-Falsos positivos,0
+Falsos positivos,1
 Falsos negativos,0
 Verdaderos positivos,2
 
@@ -153,9 +153,9 @@ Falsos negativos,0
 Verdaderos positivos,2
 
 Sujeto,s3
-Precision,100.0
+Precision,66.66666666666667
 Recall,100.0
-Falsos positivos,0
+Falsos positivos,1
 Falsos negativos,0
 Verdaderos positivos,2
 
@@ -174,9 +174,9 @@ Falsos negativos,0
 Verdaderos positivos,2
 
 Sujeto,s32
-Precision,66.66666666666667
+Precision,100.0
 Recall,100.0
-Falsos positivos,1
+Falsos positivos,0
 Falsos negativos,0
 Verdaderos positivos,2
 
@@ -196,15 +196,15 @@ Verdaderos positivos,2
 
 Sujeto,s35
 Precision,100.0
-Recall,100.0
+Recall,50.0
 Falsos positivos,0
-Falsos negativos,0
-Verdaderos positivos,2
+Falsos negativos,1
+Verdaderos positivos,1
 
 Sujeto,s36
-Precision,100.0
+Precision,66.66666666666667
 Recall,100.0
-Falsos positivos,0
+Falsos positivos,1
 Falsos negativos,0
 Verdaderos positivos,2
 
@@ -216,9 +216,9 @@ Falsos negativos,0
 Verdaderos positivos,2
 
 Sujeto,s38
-Precision,100.0
+Precision,50.0
 Recall,100.0
-Falsos positivos,0
+Falsos positivos,2
 Falsos negativos,0
 Verdaderos positivos,2
 

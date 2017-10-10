@@ -18,14 +18,14 @@ class FacadeOperador(Facade):
         El constructor inicializa el facade de la clase
         '''
         self.facade = p_facade
-    def cargar_imagenes(self, img_url, _num_para_entrenar=6):
+    def cargar_imagenes(self, img_url, num_para_entrenar):
         '''
         Metodo cargar_imagenes
         Carga las imagenes para el entrenamiento
         @param img_url la direccion local de donde se van a sacar los sujetos y sus imagenes
         @return una tupla con informacion de si se realizo bien o mal
         '''
-        return self.facade.cargar_imagenes(img_url, _num_para_entrenar=_num_para_entrenar)
+        return self.facade.cargar_imagenes(img_url, num_para_entrenar)
     def entrenar(self, ent_prefix, energy_pct):
         '''
         Metodo entrenar

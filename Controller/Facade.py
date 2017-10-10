@@ -17,14 +17,16 @@ class Facade(object):
         El constructor inicializa el controlador de la clase
         '''
         self.controlador = Controlador()
-    def cargar_imagenes(self, img_url, _num_para_entrenar=6):
+    def cargar_imagenes(self, img_url, num_para_entrenar):
         '''
         Metodo cargar_imagenes
         Carga las imagenes para el entrenamiento
         @param img_url la direccion local de donde se van a sacar los sujetos y sus imagenes
         @return una tupla con informacion de si se realizo bien o mal
         '''
-        return self.controlador.cargar_imagenes(img_url, _num_para_entrenar=_num_para_entrenar)
+        if num_para_entrenar is None:
+            return self.controlador.cargar_imagenes(img_url)
+        return self.controlador.cargar_imagenes(img_url, _num_para_entrenar=num_para_entrenar)
     def entrenar(self, ent_prefix, energy_pct):
         '''
         Metodo entrenar

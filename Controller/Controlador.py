@@ -263,7 +263,7 @@ class Controlador(object):
                 imgspath_entrenamiento = self.de_entrenamiento
                 imgspath_pruebas = os.listdir(self.url_sujetos + '/' + sujeto)
                 for img in imgspath_pruebas:
-                    if img in imgspath_entrenamiento == False:
+                    if (img in imgspath_entrenamiento) is False:
                         path = self.url_sujetos + '/' + sujeto + '/' + img
                         id_resultante = self.clasificar(path, "PRUEBAS", False)
                         sujeto_resultante = self.lista_de_sujetos.get_sujeto_at(id_resultante)
