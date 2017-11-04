@@ -11,9 +11,13 @@ Created on Aug 16, 2017
 from __future__ import print_function
 import os
 import csv
+import random
+import ast
 import cv2
-from Controller.GestorSujeto import GestorSujeto
 import numpy as np
+import tiempo
+from Controller.GestorSujeto import GestorSujeto
+from Controller.GestorEntrenamiento import GestorEntrenamiento
 class Controlador(object):
     # pylint: disable=too-many-instance-attributes
     #se considera que los 10 atributos son necesarios
@@ -28,6 +32,7 @@ class Controlador(object):
         El constructor unicamente inicializa la lista de Sujetos en la aplicacion
         '''
         self.lista_de_sujetos = GestorSujeto()
+        self.lista_entrenamientos = GestorEntrenamiento()
         self.num_para_entrenar = None
         self.mean = None
         self.matriz_img_vec = None
@@ -38,6 +43,7 @@ class Controlador(object):
         self.de_entrenamiento = None
         self.num_sujetos = None
         self.url_sujetos = None
+        #self.carga_inicial()
     def agregar_sujeto(self, dict_sujeto):
         '''
         Metodo agregar_sujeto
@@ -46,6 +52,20 @@ class Controlador(object):
         @return True/False segun si se agrega con exito el sujeto
         '''
         return self.lista_de_sujetos.agregar(dict_sujeto)
+    def seleccionar_imgs(self, cantidad):
+        """
+        Metodo seleccionar_imgs
+        Seleccionar images a usar para entrenamiento de manera
+        random
+        @param cantidad, cantidad de imagenes a escoger
+        @return imagenes seleccionadas
+        """
+        imgs_seleccionadas = random.sample(range(1, 11), cantidad)
+        imgs_result = []
+        for img in imgs_seleccionadas:
+            imgs_result += [str(img) + ".pgm"]
+        return imgs_result
+    #@tiempo.measure_time
     def cargar_imagenes(self, img_url, _num_para_entrenar=6):
         """
         Metodo cargar_imagenes
@@ -65,14 +85,13 @@ class Controlador(object):
             sujetos = [sujeto for sujeto in os.listdir(img_url)
                        if os.path.isdir(os.path.join(img_url, sujeto))]
             self.num_sujetos = len(sujetos)
+            #Ahora por cada sujeto se sacan los nombres de las imagenes en su respectiva carpeta
+            imgspath = self.seleccionar_imgs(_num_para_entrenar)
+            self.de_entrenamiento = imgspath
             for sujeto in sujetos:
-                #Ahora por cada sujeto se sacan los nombres de las imagenes en su respectiva carpeta
-                imgspath = os.listdir(img_url + '/' + sujeto)
                 dict_sujeto = {}
                 dict_sujeto["nombre"] = sujeto
                 dict_sujeto["fotos"] = []
-                imgspath = imgspath[:_num_para_entrenar]
-                self.de_entrenamiento = imgspath
                 for img in imgspath:
                     # Por ruta de imagen, la abrimos y transformamos la imagen
                     path = img_url + '/' + sujeto + '/' + img
@@ -225,18 +244,34 @@ class Controlador(object):
         @param el prefijo que fue escrito
         @return ...
         '''
+        entrenamiento = {}
         nbr_auto_vectores = ent_prefix + "_auto_caras.txt"
         np.savetxt('../datos/entrenamientos/' + nbr_auto_vectores, self.auto_vectores)
+        entrenamiento["auto_vectores"] = self.auto_vectores
         nbr_mean = ent_prefix + "_mean.txt"
         np.savetxt('../datos/entrenamientos/' + nbr_mean, self.mean)
+        entrenamiento["mean"] = self.mean
         nbr_pesos = ent_prefix + "_proyecciones.txt"
         np.savetxt('../datos/entrenamientos/' + nbr_pesos, self.pesos)
+        entrenamiento["pesos"] = self.pesos
+        with open('../datos/entrenamientos/' + ent_prefix + "_imgs.txt", "w+") as file:
+            file.write(str(self.de_entrenamiento))
+        file.close()
+        entrenamiento["imgs_usadas"] = self.de_entrenamiento
+        entrenamiento["prefijo"] = ent_prefix
+        self.lista_entrenamientos.agregar(entrenamiento)
     def cargar_entrenamiento(self, ent_prefix):
         """
         Metodo cargar_entrenamiento
         Toma los datos de los archivos .txt y los pone en sus respectivas variables
         @param el prefijo
         @return ...
+        """
+        entrenamiento = self.lista_entrenamientos.cargar_entrenamiento(ent_prefix)
+        self.auto_vectores = entrenamiento[0]
+        self.mean = entrenamiento[1]
+        self.pesos = entrenamiento[2]
+        self.de_entrenamiento = entrenamiento[3]
         """
         nbr_auto_vectores = ent_prefix + "_auto_caras.txt"
         self.auto_vectores = np.matrix(np.loadtxt('../datos/entrenamientos/'
@@ -245,6 +280,46 @@ class Controlador(object):
         self.mean = np.loadtxt('../datos/entrenamientos/' + nbr_mean, dtype='float64')
         nbr_pesos = ent_prefix + "_proyecciones.txt"
         self.pesos = np.matrix(np.loadtxt('../datos/entrenamientos/' + nbr_pesos, dtype='float64'))
+        """
+    def carga_inicial(self):
+        """
+        Metodo carga_inicial
+        Carga todos los entrenamientos guardados en la carpeta entrenamientos
+        """
+        prefijos = self.get_prefijos()
+        for prefijo in prefijos:
+            entrenamiento = {}
+            nbr_auto_vectores = prefijo + "_auto_caras.txt"
+            entrenamiento["auto_vectores"] = np.matrix(np.loadtxt('../datos/entrenamientos/'
+                                                       + nbr_auto_vectores, dtype='float64'))
+            nbr_mean = prefijo + "_mean.txt"
+            entrenamiento["mean"] = np.loadtxt('../datos/entrenamientos/'
+                                                + nbr_mean, dtype='float64')
+            nbr_pesos = prefijo + "_proyecciones.txt"
+            entrenamiento["pesos"] = np.matrix(np.loadtxt('../datos/entrenamientos/'
+                                                           + nbr_pesos, dtype='float64'))
+            with open('../datos/entrenamientos/' + prefijo + "_imgs.txt", "r") as file:
+                data = file.read()
+                entrenamiento["imgs_usadas"] = ast.literal_eval(data)
+            entrenamiento["prefijo"] = prefijo
+            self.lista_entrenamientos.agregar(entrenamiento)
+    def get_prefijos(self):
+        """
+        Metodo get_prefijos
+        Obtiene los prefijos de los entrenamientos guardados
+        @return lista con los prefijos
+        """
+        entrenamientos_url = '../datos/entrenamientos/'
+        prefijos_tmp = [prefijo for prefijo in os.listdir(entrenamientos_url)]
+        prefijos = []
+        for prefijo in prefijos_tmp:
+            prefijo = prefijo.replace("_auto_caras.txt", "")
+            prefijo = prefijo.replace("_mean.txt", "")
+            prefijo = prefijo.replace("_proyecciones.txt", "")
+            prefijo = prefijo.replace("_imgs.txt", "")
+            if (prefijo in prefijos) is False:
+                prefijos += [prefijo]
+        return prefijos
     # pylint: disable=R0914
     def get_precision(self):
         """

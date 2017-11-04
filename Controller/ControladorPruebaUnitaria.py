@@ -129,10 +129,10 @@ class ControladorTest(unittest.TestCase):
         @return Fail si reconoce incorrectamente al sujeto
         @return Ok en caso contrario
         """
-        self.tester.cargar_imagenes("../Images/")
+        self.tester.cargar_imagenes("../Images/", _num_para_entrenar=8)
         self.tester.entrenar("prueba_unitaria1", 0.85)
         # pylint: disable-msg=C0301
-        id_sujeto = self.tester.clasificar("../Images/s36/8.pgm", "prueba_unitaria", False)
+        id_sujeto = self.tester.clasificar("../Images/s36/8.pgm", "prueba_unitaria1", False)
         sujeto = self.tester.lista_de_sujetos.get_sujeto_at(id_sujeto)
         self.assertEqual(sujeto[1], "s36")
     def test_carga_de_entrenamiento(self):
@@ -140,7 +140,7 @@ class ControladorTest(unittest.TestCase):
         Metodo test_carga_de_entrenamiento
         Prueba del metodo cargar_entrenamiento en la case Controlador,
         la prueba se realiza asegurando que el entrenamiento
-        se cargue correctamente luego de haberlo guardado
+        se cargue correctamente luego de haberlo guardado en memoria
         @param prefijo del entrenamiento a guardar y cargar
         @return Fail si los auto vectores e imagenes proyectadas no son
         iguales despues y antes de guardar
@@ -156,6 +156,76 @@ class ControladorTest(unittest.TestCase):
         imagenes_proyectadas_cargados = self.tester.pesos
         self.assertEqual(auto_vectores_actuales.tolist(), auto_vectores_cargados.tolist())
         self.assertEqual(imagenes_proyectadas_actuales.tolist(), imagenes_proyectadas_cargados.tolist())
+    def test_guardar_entrenamiento(self):
+        """
+        Metodo test_guardar_entrenamiento
+        Prueba del metodo guardar_entrenamiento en la clase Controlador
+        La prueba se realiza asegurando que el entrenamiento
+        se guarde correctamente
+        @param prefijo del entrenamiento para guardar
+        @return Fail si no se guardaron correctamente los arreglos
+        @return Ok en caso contrario
+        """
+        self.tester.auto_vectores = np.array([0,0,0])
+        self.tester.mean = np.array([0,0,0])
+        self.tester.pesos = np.array([0,0,0])
+        self.tester.guardar_entrenamiento("prueba_unitaria3")
+        nbr_auto_vectores = "prueba_unitaria3_auto_caras.txt"
+        self.tester.auto_vectores = np.loadtxt('../datos/entrenamientos/'
+                                                   + nbr_auto_vectores, dtype='float64')
+        nbr_mean = "prueba_unitaria3_mean.txt"
+        self.tester.mean = np.loadtxt('../datos/entrenamientos/' + nbr_mean, dtype='float64')
+        nbr_pesos = "prueba_unitaria3_proyecciones.txt"
+        self.tester.pesos = np.loadtxt('../datos/entrenamientos/'
+                                                 + nbr_pesos, dtype='float64')
+        self.assertEqual(self.tester.auto_vectores.tolist(), [0, 0, 0])
+        self.assertEqual(self.tester.mean.tolist(), [0, 0, 0])
+        self.assertEqual(self.tester.pesos.tolist(), [0, 0, 0])
+    def test_get_precision(self):
+        """
+        Metodo test_get_precision
+        Prueba del metodo get_precision en la clase Cotrolador
+        La prueba se realiza asegurando que se realice la precision
+        correctamente revisando la salida del metodo
+        @param prefijo, del entrenamiento a usar
+        @return Fail si no se realiza la precision correctamente
+        @return Ok  en caso contrario
+        """
+        self.tester.cargar_imagenes("../Images/")
+        self.tester.entrenar("prueba_unitaria4", 0.85)
+        self.tester.cargar_entrenamiento("prueba_unitaria4")
+        self.tester.url_sujetos = "../Images"
+        result = self.tester.get_precision()
+        self.assertEqual(result[0], 0)
+    def test_agregar_sujeto(self):
+        """
+        Metodo test_agregar_sujeto
+        Prueba del metodo agregar_sujeto en la clase Cotrolador
+        La prueba se realiza asegurando que un sujeto se agregue correctamente
+        a la lista de sujetos
+        @param dict_sujeto, diccionario representando los datos
+        pricipales de un sujeto
+        @return Fail si no se guarda al sujeto
+        @retunr Ok en cualquier otro caso
+        """
+        dict_sujeto = {}
+        dict_sujeto["nombre"] = "sujeto_1"
+        dict_sujeto["fotos"] = []
+        self.tester.agregar_sujeto(dict_sujeto)
+        result = self.tester.lista_de_sujetos.get_sujeto_at(1)
+        self.assertEqual(result[1], "sujeto_1")
+    def test_carga_inicial(self):
+        """
+        Metodo test_carga_inicial
+        Prueba del metodo cargar_inicial en la case Controlador,
+        la prueba se realiza asegurando que el entrenamiento
+        se cargue correctamente luego de haberlo guardado en archivos
+        @param null
+        @return Fail si no se cargan los entrenamientos guardados
+        @return Ok en caso contrario
+        """
+        self.tester.carga_inicial()
+        self.assertNotEqual(self.tester.lista_entrenamientos.lista_general, [])
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

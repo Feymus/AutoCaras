@@ -35,34 +35,18 @@ def submit_imgs_dir():
     if request.method == 'POST':
         ent_prefix = request.form['ent_prefix']
         energy_pct = request.form['energy_pct']
+        num_entrenar = request.form['num_entrenar']
         img_url = request.form['img_url']
-        estado = CONTROLADOROP.cargar_imagenes(img_url)
+        estado = CONTROLADOROP.cargar_imagenes(img_url, num_entrenar)
         respuesta = jsonify(
             status=estado[0],
             msg=estado[1]
         )
         if estado[0] == 0:
             CONTROLADOROP.entrenar(ent_prefix, int(energy_pct)/100)
+            CONTROLADOROP.get_precision()
             #sujeto = CONTROLADORUC.clasificar("../Images/s41/8.pgm", ent_prefix, False)
             #print("Sujeto: ", sujeto)
-            return respuesta
-        return respuesta
-    return APP.send_static_file('index.html')
-@APP.route('/precision', methods=['GET', 'POST'])
-def get_precision():
-    """ Recibe por POST la direccion local de los sujetos a cargar para pruebas """
-    if request.method == 'POST':
-        num_entrenar = request.form['num_entrenar']
-        img_url = request.form['img_url']
-        num_entrenar = 10 - (int(num_entrenar)//10)
-        estado = CONTROLADOROP.cargar_imagenes(img_url, num_entrenar)
-        if estado[0] == 0:
-            CONTROLADOROP.entrenar("PRUEBAS", 0.85)
-            estado = CONTROLADOROP.get_precision()
-            respuesta = jsonify(
-                status=estado[0],
-                msg=estado[1]
-            )
             return respuesta
         return respuesta
     return APP.send_static_file('index.html')

@@ -47,6 +47,7 @@ class GestorSujeto(GestorGeneral):
         @return estado de la operacion"""
         contador = 0
         for sujeto in self.lista_general:
+            #print("s: ", sujeto.get_nombre(), " ", contador, " - ", id_sujeto)
             if contador == id_sujeto-1:
                 return (0, sujeto.get_nombre())
             contador += 1
