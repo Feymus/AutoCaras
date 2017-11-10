@@ -43,7 +43,7 @@ class Controlador(object):
         self.de_entrenamiento = None
         self.num_sujetos = None
         self.url_sujetos = None
-        #self.carga_inicial()
+        self.carga_inicial()
     def agregar_sujeto(self, dict_sujeto):
         '''
         Metodo agregar_sujeto
@@ -236,6 +236,8 @@ class Controlador(object):
         diff = self.pesos - autovectores_transpuesta
         norms = np.linalg.norm(diff, axis=0)
         id_cercano = np.argmin(norms)
+        print(id_cercano)
+        print(self.num_para_entrenar)
         return (id_cercano // self.num_para_entrenar) + 1
     def guardar_entrenamiento(self, ent_prefix):
         '''
@@ -272,15 +274,7 @@ class Controlador(object):
         self.mean = entrenamiento[1]
         self.pesos = entrenamiento[2]
         self.de_entrenamiento = entrenamiento[3]
-        """
-        nbr_auto_vectores = ent_prefix + "_auto_caras.txt"
-        self.auto_vectores = np.matrix(np.loadtxt('../datos/entrenamientos/'
-                                                   + nbr_auto_vectores, dtype='float64'))
-        nbr_mean = ent_prefix + "_mean.txt"
-        self.mean = np.loadtxt('../datos/entrenamientos/' + nbr_mean, dtype='float64')
-        nbr_pesos = ent_prefix + "_proyecciones.txt"
-        self.pesos = np.matrix(np.loadtxt('../datos/entrenamientos/' + nbr_pesos, dtype='float64'))
-        """
+        self.num_para_entrenar = len(self.de_entrenamiento)
     def carga_inicial(self):
         """
         Metodo carga_inicial

@@ -36,20 +36,16 @@ myApp.controller('ReconocedorCtrl', function($scope, $http){
 
 	$scope.send_dir = function(){
 
-		var prefix = $scope.prefix;
-		var energy = $scope.energy;
-		var muestras = $scope.muestras;
-    	var dir = $scope.name;
+		var prefix = $scope.prefix_reconocimiento;
+    	var dir = $scope.name_sujeto;
 
 		var data_json = $.param({
 			img_url:dir,
-			ent_prefix:prefix,
-			energy_pct:energy,
-			num_entrenar:muestras
+			ent_prefix:prefix
 		});
 
 		$http({
-			url: url + "cargaimgs",
+			url: url + "reconocer",
 			method: "POST",
 			data: data_json,
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }

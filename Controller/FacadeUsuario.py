@@ -24,7 +24,7 @@ class FacadeUsuario(Facade):
         Recibe como parametros el directorio de la imagen a clasficar, la imagen media
         de las imagenes de entrenamiento, una matriz de autovectores y los pesos de estos
         @param directorio de imagen a clasificar, la imagen media de las imagenes de entrenamiento
-        @return id_cercano
+        @return sujeto identificado
         '''
         return self.facade.clasificar(img_dir, ent_prefix, cargar_entrenamiento)
     

@@ -37,7 +37,7 @@ def submit_imgs_dir():
         energy_pct = request.form['energy_pct']
         num_entrenar = request.form['num_entrenar']
         img_url = request.form['img_url']
-        estado = CONTROLADOROP.cargar_imagenes(img_url, num_entrenar)
+        estado = CONTROLADOROP.cargar_imagenes(img_url, (100-int(num_entrenar))//10)
         respuesta = jsonify(
             status=estado[0],
             msg=estado[1]
@@ -48,6 +48,28 @@ def submit_imgs_dir():
             #sujeto = CONTROLADORUC.clasificar("../Images/s41/8.pgm", ent_prefix, False)
             #print("Sujeto: ", sujeto)
             return respuesta
+        return respuesta
+    return APP.send_static_file('index.html')
+## Metodo reconocer
+#
+@APP.route('/reconocer', methods=['GET', 'POST'])
+def reconocer():
+    """ Recibe por POST la direccion local de la imagen del sujeto a identificar"""
+    if request.method == 'POST':
+        ent_prefix = request.form['ent_prefix']
+        img_url = request.form['img_url']
+        print(img_url)
+        sujeto = CONTROLADORUC.clasificar(img_url, ent_prefix, True)
+        if sujeto[0] == 0:
+            respuesta = jsonify(
+                status=sujeto[0],
+                msg="Sujeto identificado como: " + sujeto[1]
+            )
+        else:
+            respuesta = jsonify(
+                status=sujeto[0],
+                msg=sujeto[1]
+            )
         return respuesta
     return APP.send_static_file('index.html')
 if __name__ == '__main__':
