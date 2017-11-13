@@ -17,6 +17,7 @@ class Facade(object):
         El constructor inicializa el controlador de la clase
         '''
         self.controlador = Controlador()
+        self.controlador.carga_inicial()
     def cargar_imagenes(self, img_url, num_para_entrenar):
         '''
         Metodo cargar_imagenes

@@ -43,7 +43,6 @@ class Controlador(object):
         self.de_entrenamiento = None
         self.num_sujetos = None
         self.url_sujetos = None
-        self.carga_inicial()
     def agregar_sujeto(self, dict_sujeto):
         '''
         Metodo agregar_sujeto
@@ -236,8 +235,6 @@ class Controlador(object):
         diff = self.pesos - autovectores_transpuesta
         norms = np.linalg.norm(diff, axis=0)
         id_cercano = np.argmin(norms)
-        print(id_cercano)
-        print(self.num_para_entrenar)
         return (id_cercano // self.num_para_entrenar) + 1
     def guardar_entrenamiento(self, ent_prefix):
         '''
@@ -342,10 +339,16 @@ class Controlador(object):
                         sujeto_resultante = self.lista_de_sujetos.get_sujeto_at(id_resultante)
                         tabla_de_clases = self.agregar_a_tabla(tabla_de_clases,
                                                                 sujeto_resultante[1], sujeto)
+            cant_sujetos = 0
+            avg_precision = 0
+            avg_recall = 0
             for sujeto in sujetos:
+                cant_sujetos += 1
                 result = self.evaluacion_de_clase(tabla_de_clases, sujeto)
                 precision = result[0]
+                avg_precision += precision
                 recall = result[1]
+                avg_recall += recall
                 falsos_n = result[2]
                 falsos_p = result[3]
                 verdaderos_p = result[4]
@@ -356,6 +359,11 @@ class Controlador(object):
                 writer.writerow(('Falsos negativos', falsos_p))
                 writer.writerow(('Verdaderos positivos', verdaderos_p))
                 writer.writerow((''))
+            avg_precision = avg_precision / cant_sujetos
+            avg_recall = avg_recall / cant_sujetos
+            writer.writerow(('Precision promedio', avg_precision))
+            writer.writerow(('Recall promedio', avg_recall))
+            writer.writerow((''))
             file.close()
             return (0, "Precision de cada sujeto generada exitosamente!")
         except Exception as exception: # pylint: disable-msg=W0703

@@ -58,7 +58,6 @@ def reconocer():
     if request.method == 'POST':
         ent_prefix = request.form['ent_prefix']
         img_url = request.form['img_url']
-        print(img_url)
         sujeto = CONTROLADORUC.clasificar(img_url, ent_prefix, True)
         if sujeto[0] == 0:
             respuesta = jsonify(
