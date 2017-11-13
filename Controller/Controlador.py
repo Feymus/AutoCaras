@@ -269,7 +269,11 @@ class Controlador(object):
         @param el prefijo
         @return ...
         """
-        entrenamiento = self.lista_entrenamientos.cargar_entrenamiento(ent_prefix)
+        if ent_prefix != "":
+            entrenamiento = self.lista_entrenamientos.cargar_entrenamiento(ent_prefix)
+        else:
+            entrenamiento = self.lista_entrenamientos.cargar_entrenamiento("ent")
+        
         self.auto_vectores = entrenamiento[0]
         self.mean = entrenamiento[1]
         self.pesos = entrenamiento[2]
