@@ -1,92 +1,92 @@
 Sujeto,s1
 Precision,100.0
-Recall,75.0
+Recall,100.0
 Falsos positivos,0
-Falsos negativos,1
-Verdaderos positivos,3
+Falsos negativos,0
+Verdaderos positivos,2
 
 Sujeto,s10
 Precision,100.0
-Recall,75.0
+Recall,100.0
 Falsos positivos,0
-Falsos negativos,1
-Verdaderos positivos,3
+Falsos negativos,0
+Verdaderos positivos,2
 
 Sujeto,s11
 Precision,100.0
-Recall,75.0
+Recall,100.0
 Falsos positivos,0
-Falsos negativos,1
-Verdaderos positivos,3
+Falsos negativos,0
+Verdaderos positivos,2
 
 Sujeto,s12
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s13
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s14
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s15
-Precision,100.0
+Precision,50.0
 Recall,100.0
-Falsos positivos,0
+Falsos positivos,2
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s16
-Precision,100.0
+Precision,66.66666666666667
 Recall,100.0
-Falsos positivos,0
+Falsos positivos,1
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s17
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s18
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s19
 Precision,100.0
-Recall,75.0
+Recall,100.0
 Falsos positivos,0
-Falsos negativos,1
-Verdaderos positivos,3
+Falsos negativos,0
+Verdaderos positivos,2
 
 Sujeto,s2
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s20
 Precision,100.0
-Recall,50.0
+Recall,100.0
 Falsos positivos,0
-Falsos negativos,2
+Falsos negativos,0
 Verdaderos positivos,2
 
 Sujeto,s21
@@ -94,197 +94,197 @@ Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s22
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s23
-Precision,57.142857142857146
+Precision,100.0
 Recall,100.0
-Falsos positivos,3
+Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s24
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s25
 Precision,100.0
-Recall,75.0
+Recall,100.0
 Falsos positivos,0
-Falsos negativos,1
-Verdaderos positivos,3
+Falsos negativos,0
+Verdaderos positivos,2
 
 Sujeto,s26
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s27
-Precision,66.66666666666667
+Precision,100.0
 Recall,100.0
-Falsos positivos,2
+Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s28
 Precision,100.0
-Recall,75.0
+Recall,100.0
 Falsos positivos,0
-Falsos negativos,1
-Verdaderos positivos,3
+Falsos negativos,0
+Verdaderos positivos,2
 
 Sujeto,s29
-Precision,66.66666666666667
+Precision,100.0
 Recall,100.0
-Falsos positivos,2
+Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s3
-Precision,57.142857142857146
+Precision,100.0
 Recall,100.0
-Falsos positivos,3
+Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s30
-Precision,80.0
+Precision,100.0
 Recall,100.0
-Falsos positivos,1
+Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s31
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s32
-Precision,100.0
+Precision,66.66666666666667
 Recall,100.0
-Falsos positivos,0
+Falsos positivos,1
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s33
 Precision,100.0
-Recall,75.0
+Recall,50.0
 Falsos positivos,0
 Falsos negativos,1
-Verdaderos positivos,3
+Verdaderos positivos,1
 
 Sujeto,s34
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s35
-Precision,100.0
-Recall,100.0
+Precision,0
+Recall,0.0
 Falsos positivos,0
-Falsos negativos,0
-Verdaderos positivos,4
+Falsos negativos,2
+Verdaderos positivos,0
 
 Sujeto,s36
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s37
-Precision,80.0
+Precision,100.0
 Recall,100.0
-Falsos positivos,1
+Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s38
-Precision,66.66666666666667
-Recall,50.0
-Falsos positivos,1
-Falsos negativos,2
+Precision,100.0
+Recall,100.0
+Falsos positivos,0
+Falsos negativos,0
 Verdaderos positivos,2
 
 Sujeto,s39
-Precision,100.0
-Recall,50.0
-Falsos positivos,0
-Falsos negativos,2
+Precision,66.66666666666667
+Recall,100.0
+Falsos positivos,1
+Falsos negativos,0
 Verdaderos positivos,2
 
 Sujeto,s4
 Precision,100.0
-Recall,75.0
+Recall,100.0
 Falsos positivos,0
-Falsos negativos,1
-Verdaderos positivos,3
+Falsos negativos,0
+Verdaderos positivos,2
 
 Sujeto,s40
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s41
-Precision,100.0
-Recall,100.0
+Precision,0
+Recall,0.0
 Falsos positivos,0
-Falsos negativos,0
-Verdaderos positivos,4
+Falsos negativos,2
+Verdaderos positivos,0
 
 Sujeto,s5
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s6
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s7
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s8
 Precision,100.0
 Recall,100.0
 Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
 Sujeto,s9
-Precision,80.0
+Precision,100.0
 Recall,100.0
-Falsos positivos,1
+Falsos positivos,0
 Falsos negativos,0
-Verdaderos positivos,4
+Verdaderos positivos,2
 
-Precision promedio,94.00696864111498
-Recall promedio,91.46341463414635
+Precision promedio,91.46341463414633
+Recall promedio,93.90243902439025
 

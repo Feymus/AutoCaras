@@ -281,6 +281,7 @@ class Controlador(object):
         Metodo carga_inicial
         Carga todos los entrenamientos guardados en la carpeta entrenamientos
         """
+        self.cargar_imagenes("../Images/")
         prefijos = self.get_prefijos()
         for prefijo in prefijos:
             entrenamiento = {}

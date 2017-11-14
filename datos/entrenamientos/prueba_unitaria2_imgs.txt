@@ -1,1 +1,1 @@
-['4.pgm', '7.pgm', '1.pgm', '5.pgm', '8.pgm', '10.pgm']
+['7.pgm', '4.pgm', '6.pgm', '3.pgm', '1.pgm', '10.pgm']
